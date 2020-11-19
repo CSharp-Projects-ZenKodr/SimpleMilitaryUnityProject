@@ -132,6 +132,11 @@ namespace Entities.Player {
             _animationHandler.SetLocomotionAnimation(AnimationSpeedStates.Walk);
         }
 
+        //private void Jump 
+        private void Jump() {
+            
+        }
+        
         #endregion
     }
 }

@@ -4,6 +4,14 @@ using Pathfinding;
 using UnityEngine;
 
 namespace Entities {
+    #region Required Mono Components
+    
+    [RequireComponent(typeof(AIPath))]
+    [RequireComponent(typeof(RaycastModifier))]
+    [RequireComponent(typeof(SimpleSmoothModifier))]
+
+    #endregion
+    
     public abstract class Agent : MonoBehaviour {
         #region Protected Fields & Propreties - Core Systems
 
@@ -47,6 +55,10 @@ namespace Entities {
         #endregion
 
         #region Private Methods
+
+        private void OnAnimatorMove() {
+            transform.position += _animationHandler.ReturnDeltaPositionVector();
+        }
 
         #endregion
     }

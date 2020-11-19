@@ -45,9 +45,22 @@ namespace Animation {
             _animator.SetFloat(AnimationParameterStatics.Speed, locomotionIdentifier); 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bodyHorizontal"></param>
+        /// <param name="bodyVertical"></param>
         public void SetAnimatorBodyFloatValues(float bodyHorizontal, float bodyVertical) {
             _animator.SetFloat(AnimationParameterStatics.BodyHorizontal, bodyHorizontal);
             _animator.SetFloat(AnimationParameterStatics.BodyVertical, bodyVertical);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        public void SetWeaponTypeInt(int type) {
+            _animator.SetInteger(AnimationParameterStatics.WeaponTypeInt, type);
         }
         
         /// <summary>
@@ -55,6 +68,10 @@ namespace Animation {
         /// Can invoke other random idle animations via coroutines
         /// </summary>
         public void SetToRandomIdleAnimation() {
+        }
+
+        public Vector3 ReturnDeltaPositionVector() {
+            return _animator.deltaPosition;
         }
         
         #endregion
