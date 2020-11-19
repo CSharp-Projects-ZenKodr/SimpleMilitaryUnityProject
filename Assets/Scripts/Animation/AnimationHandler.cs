@@ -46,7 +46,7 @@ namespace Animation {
         }
 
         /// <summary>
-        /// 
+        /// Sets the agent's body floats in the animation controller
         /// </summary>
         /// <param name="bodyHorizontal"></param>
         /// <param name="bodyVertical"></param>
@@ -56,11 +56,26 @@ namespace Animation {
         }
 
         /// <summary>
-        /// 
+        /// Sets the agent's weapon type int in the animation controller
         /// </summary>
         /// <param name="type"></param>
         public void SetWeaponTypeInt(int type) {
             _animator.SetInteger(AnimationParameterStatics.WeaponTypeInt, type);
+        }
+
+        /// <summary>
+        /// Sets a boolean animator parameter based on a value
+        /// </summary>
+        /// <param name="parameter">An AnimationParameterStatic</param>
+        /// <param name="value">True or false</param>
+        public void TriggerBool(string parameter) {
+            _animator.SetBool(parameter, true);
+            //_animator.animator
+        }
+
+        public void SetAnimatorTrigger(string triggerName) {
+            _animator.SetTrigger(triggerName);
+            
         }
         
         /// <summary>
@@ -70,6 +85,11 @@ namespace Animation {
         public void SetToRandomIdleAnimation() {
         }
 
+        /// <summary>
+        /// When an animation is applied to a game object and contains root motion, the delta between the parent
+        /// game object and the object with the animator on it will be in sync via ReturnDeltaPositionVector
+        /// </summary>
+        /// <returns></returns>
         public Vector3 ReturnDeltaPositionVector() {
             return _animator.deltaPosition;
         }
