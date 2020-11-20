@@ -70,12 +70,23 @@ namespace Animation {
         /// <param name="value">True or false</param>
         public void TriggerBool(string parameter) {
             _animator.SetBool(parameter, true);
-            //_animator.animator
         }
 
+        /// <summary>
+        /// Trigger an animation
+        /// </summary>
+        /// <param name="triggerName">String identifier for the animation that should be triggered</param>
         public void SetAnimatorTrigger(string triggerName) {
             _animator.SetTrigger(triggerName);
-            
+        }
+
+        /// <summary>
+        /// Returns whether or not a boolean animator parameter is set to true or false
+        /// </summary>
+        /// <param name="boolToCheck">The boolean parameter to check; <see cref="AnimationParameterStatics"/></param>
+        /// <returns></returns>
+        public bool BooleanStatus(string boolToCheck) {
+            return _animator.GetBool(boolToCheck);
         }
         
         /// <summary>
@@ -83,6 +94,33 @@ namespace Animation {
         /// Can invoke other random idle animations via coroutines
         /// </summary>
         public void SetToRandomIdleAnimation() {
+        }
+
+        /// <summary>
+        /// Forces the animation model to 'idle'
+        /// </summary>
+        public void SetAnimationModelToIdle() {
+            _animator.SetBool(AnimationAgentActions.IsIdle, true);
+            _animator.SetBool(AnimationAgentActions.IsWalking, false);
+            _animator.SetBool(AnimationAgentActions.IsRunning, false);
+        }
+
+        /// <summary>
+        /// Forces the animation model to 'walk'
+        /// </summary>
+        public void SetAnimationModelToWalking() {
+            _animator.SetBool(AnimationAgentActions.IsIdle, false);
+            _animator.SetBool(AnimationAgentActions.IsWalking, true);
+            _animator.SetBool(AnimationAgentActions.IsRunning, false);
+        }
+
+        /// <summary>
+        /// Forces the animation model to 'run'
+        /// </summary>
+        public void SetAnimationModelToRunning() {
+            _animator.SetBool(AnimationAgentActions.IsIdle, false);
+            _animator.SetBool(AnimationAgentActions.IsWalking, false);
+            _animator.SetBool(AnimationAgentActions.IsRunning, true);
         }
 
         /// <summary>

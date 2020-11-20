@@ -80,15 +80,15 @@ namespace CameraHelper {
             Vector3 position = TheCamera.transform.position;
             Vector3 rotation = new Vector3(40, TheCamera.transform.eulerAngles.y, 0);
 
-            // W, A, S, D Movement
-            if (Input.GetKey(KeyCode.W))
-                position += new Vector3(TheCamera.transform.forward.x, 0, TheCamera.transform.forward.z) * (cameraSpeed * Time.deltaTime);
-            if (Input.GetKey(KeyCode.S))
-                position -= new Vector3(TheCamera.transform.forward.x, 0, TheCamera.transform.forward.z) * (cameraSpeed * Time.deltaTime);
-            if (Input.GetKey(KeyCode.A))
-                position -= new Vector3(TheCamera.transform.right.x, 0, TheCamera.transform.right.z) * (cameraSpeed * Time.deltaTime);
-            if (Input.GetKey(KeyCode.D))
-                position += new Vector3(TheCamera.transform.right.x, 0, TheCamera.transform.right.z) * (cameraSpeed * Time.deltaTime);
+            // // W, A, S, D Movement
+            // if (Input.GetKey(KeyCode.W))
+            //     position += new Vector3(TheCamera.transform.forward.x, 0, TheCamera.transform.forward.z) * (cameraSpeed * Time.deltaTime);
+            // if (Input.GetKey(KeyCode.S))
+            //     position -= new Vector3(TheCamera.transform.forward.x, 0, TheCamera.transform.forward.z) * (cameraSpeed * Time.deltaTime);
+            // if (Input.GetKey(KeyCode.A))
+            //     position -= new Vector3(TheCamera.transform.right.x, 0, TheCamera.transform.right.z) * (cameraSpeed * Time.deltaTime);
+            // if (Input.GetKey(KeyCode.D))
+            //     position += new Vector3(TheCamera.transform.right.x, 0, TheCamera.transform.right.z) * (cameraSpeed * Time.deltaTime);
 
             // Q, E, Alt Rotation
             if (Input.GetKey(KeyCode.Q))

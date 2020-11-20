@@ -32,9 +32,18 @@ namespace Entity_Systems {
         /// Moves to a destination vector on A* mesh; assumes a point has been calculated on a navmesh node
         /// </summary>
         /// <param name="destinationVector">The attempted vector to get</param>
-        public void SetDestinationAndSearchPath(Vector3 destinationVector) {
+        public void SetDestinationAndSearchPathNonNormalized(Vector3 destinationVector) {
             _ai.destination = destinationVector;
             _ai.SearchPath();
+        }
+
+        /// <summary>
+        /// Similar to SetDestinationAndSearchPathNonNormalized, but normalizes the vector
+        /// Used to move player via keyboard input
+        /// </summary>
+        /// <param name="destinationVectorToNormalize"></param>
+        public void SetDestinationAndSearchPathNormalized(Vector3 destinationVectorToNormalize) {
+            
         }
 
         #endregion

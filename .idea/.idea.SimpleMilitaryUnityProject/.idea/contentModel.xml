@@ -4,6 +4,7 @@
     <e p="C:\Users\stane\.Rider2019.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\stane\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SimpleMilitaryUnityProject.620703417.00" t="ExcludeRecursive" />
     <e p="C:\Users\stane\Documents\GitHub\SimpleMilitaryUnityProject" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="AstarPathfindingProject" t="Include">
@@ -305,15 +306,34 @@
             <e p="UnityReferenceHelper.cs" t="Include" />
           </e>
         </e>
+        <e p="CameraController" t="Include">
+          <e p="Demo" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="MovingObject.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="Editor" t="Include">
+              <e p="CameraControllerEditor.cs" t="Include" />
+              <e p="CameraProfileEditor.cs" t="Include" />
+            </e>
+            <e p="Main" t="Include">
+              <e p="CameraController.cs" t="Include" />
+            </e>
+            <e p="Profiles" t="Include">
+              <e p="CameraProfile.cs" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="Input System" t="Include">
           <e p="PlayerInputControlsRevised.cs" t="Include" />
         </e>
         <e p="Scripts" t="Include">
           <e p="Animation" t="Include">
+            <e p="AnimationAgentActions.cs" t="Include" />
             <e p="AnimationHandler.cs" t="Include" />
             <e p="AnimationIdleStates.cs" t="Include" />
             <e p="AnimationParameterStatics.cs" t="Include" />
-            <e p="AnimationSpeedStates.cs" t="Include" />
             <e p="AnimationWeaponTypes.cs" t="Include" />
             <e p="AnimatorInitializer.cs" t="Include" />
           </e>

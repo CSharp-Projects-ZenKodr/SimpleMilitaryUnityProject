@@ -1,6 +1,5 @@
 ﻿using Animation;
 using Entity_Systems;
-using Input_System;
 using Interfaces;
 using Items.Weapons;
 using UnityEngine;
@@ -9,7 +8,7 @@ namespace Entities.Player {
     /// <summary>
     /// Inherits the following classes:     Pathing     Locomotion     Raycasting     Skeleton     AnimationHandler
     /// </summary>
-    public partial class Player : Agent, ISubscribeToSubSystemEvents, PlayerInputControlsRevised.IPlayerActions {
+    public partial class Player : Agent, ISubscribeToSubSystemEvents {
         #region DEBUGGING FIELDS
 
         public ProjectileWeapon ProjectileWeapon;
@@ -59,6 +58,8 @@ namespace Entities.Player {
         /// </summary>
         protected override void InitializeAgentSpecificDependencies() {
             _inputControls.Player.SetCallbacks(this);
+            _inputControls.Locomotion.SetCallbacks(this);
+            _inputControls.Inventory.SetCallbacks(this);
         }
 
         #endregion
@@ -77,7 +78,7 @@ namespace Entities.Player {
         /// Once pathfinding destination is reached, this method will set the animator speed to 'idle'
         /// </summary>
         private void OnTargetReached() {
-            _animationHandler.SetLocomotionAnimation(AnimationSpeedStates.Idle);
+            _animationHandler.SetAnimationModelToIdle();
             _locomotion.GetAIPath().canSearch = false;
         }
         
@@ -92,9 +93,9 @@ namespace Entities.Player {
         /// <param name="raycastHit">The raycast from where the mouse was clicked to the terrain collider</param>
         private void MoveToTerrainVector(RaycastHit raycastHit) {
             _locomotion.GetAIPath().canSearch = true;
-            _locomotion.SetDestinationAndSearchPath(_pathing.GetNodeDestination(raycastHit.point));
-            _animationHandler.SetAnimationInt(AnimationIdleStates.Normal);
-            _animationHandler.SetLocomotionAnimation(AnimationSpeedStates.Walk);
+            _locomotion.SetDestinationAndSearchPathNonNormalized(_pathing.GetNodeDestination(raycastHit.point));
+            //_animationHandler.SetAnimationInt(AnimationIdleStates.Normal);
+            _animationHandler.SetAnimationModelToWalking();
         }
        
         #endregion
