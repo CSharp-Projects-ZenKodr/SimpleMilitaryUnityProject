@@ -12,6 +12,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "73853dcb-6e40-4cfe-9030-b5397eb07167",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -67,6 +75,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "PrimaryClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "36a1daec-5eca-4408-ab7e-372eba0e9998",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -588,7 +607,7 @@
                     "id": "270532f4-4e9e-4fb5-968c-d9636cd6997b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold"
+                    "interactions": ""
                 },
                 {
                     "name": "Movement",
@@ -597,6 +616,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Run",
+                    "type": "Button",
+                    "id": "41b07cfb-e2f9-4bf7-9b91-a3f4620bd9da",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -665,6 +692,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "e98e269e-a1e6-4ceb-8282-1402a5efd64d",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

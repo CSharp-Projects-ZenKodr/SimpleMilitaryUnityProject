@@ -2302,9 +2302,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2980961468618403306}
-  - component: {fileID: 2980961468628282012}
+  - component: {fileID: 5289661386355628280}
+  - component: {fileID: 1121236182508220506}
   m_Layer: 0
-  m_Name: SimpleMilitary_TrainingSoldier_Black
+  m_Name: Player New
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2345,7 +2346,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2980961468628282012
+--- !u!114 &5289661386355628280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2980961468618895754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Animator: {fileID: 1121236182508220506}
+  _ActionOnDisable: 0
+--- !u!95 &1121236182508220506
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -2355,8 +2370,8 @@ Animator:
   m_GameObject: {fileID: 2980961468618895754}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 009a340ea743c464da13c08b526058b5, type: 3}
-  m_Controller: {fileID: 9100000, guid: afec2cc25e3439e4bb1b43e7c09f6503, type: 2}
-  m_CullingMode: 1
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0

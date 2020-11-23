@@ -21,8 +21,8 @@ MonoBehaviour:
     m_Address: SK_Wep_M5_01.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 151692, guid: b21be3169a812ac4d98a912512f30f95, type: 3}
-    m_TargetAsset: {fileID: 151692, guid: b21be3169a812ac4d98a912512f30f95, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0ba05bd03ee6d5e468f02f6f1df8b7a3, type: 2}
   m_SchemaSet:

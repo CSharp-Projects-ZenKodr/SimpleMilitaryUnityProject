@@ -1,14 +1,14 @@
-﻿using Animation;
-using Entity_Systems;
+﻿using Entity_Systems;
+using Entity_Systems.Player.Handlers;
 using Interfaces;
 using Items.Weapons;
 using UnityEngine;
 
 namespace Entities.Player {
     /// <summary>
-    /// Inherits the following classes:     Pathing     Locomotion     Raycasting     Skeleton     AnimationHandler
+    /// Inherits the following classes:     Pathing     Locomotion     Raycasting     Skeleton     AnimationBrain
     /// </summary>
-    public partial class Player : Agent, ISubscribeToSubSystemEvents {
+    public class Player : Agent, ISubscribeToSubSystemEvents {
         #region DEBUGGING FIELDS
 
         public ProjectileWeapon ProjectileWeapon;
@@ -51,6 +51,7 @@ namespace Entities.Player {
             _combat = new Combat();
             _equipment = new Equipment();
             _inputControls = new PlayerInputControlsRevised();
+            _inputStateHandler = new InputStateHandler();
         }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace Entities.Player {
         #region Public Methods - Initializations - Interfaces
         
         public void SubscribeToSubSystemEvents() {
-            _locomotion.GetAIPath().onTargetReached += OnTargetReached;
+            _locomotion.SubToOnTargetReach(OnTargetReached);
         }
         
         #endregion
@@ -78,8 +79,8 @@ namespace Entities.Player {
         /// Once pathfinding destination is reached, this method will set the animator speed to 'idle'
         /// </summary>
         private void OnTargetReached() {
-            _animationHandler.SetAnimationModelToIdle();
-            _locomotion.GetAIPath().canSearch = false;
+            _locomotion.MaxSpeed = 2.0f;
+            _locomotion.CanSearch = false;
         }
         
         #endregion
@@ -88,14 +89,12 @@ namespace Entities.Player {
 
         /// <summary>
         /// Will be called if a Player agent clicks on a terrain collider and has an accessible path to the
-        /// RaycastHit point
+        /// RaycastHit point. Sets the animation to walk. If the agent is not walking, sets to running (implied)
         /// </summary>
         /// <param name="raycastHit">The raycast from where the mouse was clicked to the terrain collider</param>
         private void MoveToTerrainVector(RaycastHit raycastHit) {
-            _locomotion.GetAIPath().canSearch = true;
+            _locomotion.CanSearch = true;
             _locomotion.SetDestinationAndSearchPathNonNormalized(_pathing.GetNodeDestination(raycastHit.point));
-            //_animationHandler.SetAnimationInt(AnimationIdleStates.Normal);
-            _animationHandler.SetAnimationModelToWalking();
         }
        
         #endregion

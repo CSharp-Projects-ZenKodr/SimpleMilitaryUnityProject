@@ -25,6 +25,14 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""73853dcb-6e40-4cfe-9030-b5397eb07167"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -80,6 +88,17 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""PrimaryClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36a1daec-5eca-4408-ab7e-372eba0e9998"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -601,7 +620,7 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
                     ""id"": ""270532f4-4e9e-4fb5-968c-d9636cd6997b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold""
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""Movement"",
@@ -610,6 +629,14 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""41b07cfb-e2f9-4bf7-9b91-a3f4620bd9da"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -678,6 +705,17 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e98e269e-a1e6-4ceb-8282-1402a5efd64d"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -832,6 +870,7 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_PrimaryClick = m_Player.FindAction("PrimaryClick", throwIfNotFound: true);
+        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -848,6 +887,7 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
         m_Locomotion = asset.FindActionMap("Locomotion", throwIfNotFound: true);
         m_Locomotion_Jump = m_Locomotion.FindAction("Jump", throwIfNotFound: true);
         m_Locomotion_Movement = m_Locomotion.FindAction("Movement", throwIfNotFound: true);
+        m_Locomotion_Run = m_Locomotion.FindAction("Run", throwIfNotFound: true);
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_InventoryOne = m_Inventory.FindAction("InventoryOne", throwIfNotFound: true);
@@ -904,11 +944,13 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_PrimaryClick;
+    private readonly InputAction m_Player_Crouch;
     public struct PlayerActions
     {
         private @PlayerInputControlsRevised m_Wrapper;
         public PlayerActions(@PlayerInputControlsRevised wrapper) { m_Wrapper = wrapper; }
         public InputAction @PrimaryClick => m_Wrapper.m_Player_PrimaryClick;
+        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -918,16 +960,22 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                //@PrimaryClick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryClick;
+                @PrimaryClick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryClick;
                 @PrimaryClick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryClick;
-                //@PrimaryClick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryClick;
+                @PrimaryClick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryClick;
+                @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
-               // @PrimaryClick.started += instance.OnPrimaryClick;
+                @PrimaryClick.started += instance.OnPrimaryClick;
                 @PrimaryClick.performed += instance.OnPrimaryClick;
-                //@PrimaryClick.canceled += instance.OnPrimaryClick;
+                @PrimaryClick.canceled += instance.OnPrimaryClick;
+                @Crouch.started += instance.OnCrouch;
+                @Crouch.performed += instance.OnCrouch;
+                @Crouch.canceled += instance.OnCrouch;
             }
         }
     }
@@ -1043,12 +1091,14 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
     private ILocomotionActions m_LocomotionActionsCallbackInterface;
     private readonly InputAction m_Locomotion_Jump;
     private readonly InputAction m_Locomotion_Movement;
+    private readonly InputAction m_Locomotion_Run;
     public struct LocomotionActions
     {
         private @PlayerInputControlsRevised m_Wrapper;
         public LocomotionActions(@PlayerInputControlsRevised wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_Locomotion_Jump;
         public InputAction @Movement => m_Wrapper.m_Locomotion_Movement;
+        public InputAction @Run => m_Wrapper.m_Locomotion_Run;
         public InputActionMap Get() { return m_Wrapper.m_Locomotion; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1058,22 +1108,28 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_LocomotionActionsCallbackInterface != null)
             {
-                //@Jump.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnJump;
+                @Jump.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnJump;
-                //@Jump.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnJump;
                 @Movement.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMovement;
+                @Run.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnRun;
+                @Run.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnRun;
+                @Run.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnRun;
             }
             m_Wrapper.m_LocomotionActionsCallbackInterface = instance;
             if (instance != null)
             {
-               // @Jump.started += instance.OnJump;
+                @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
-                //@Jump.canceled += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Run.started += instance.OnRun;
+                @Run.performed += instance.OnRun;
+                @Run.canceled += instance.OnRun;
             }
         }
     }
@@ -1183,6 +1239,7 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
     public interface IPlayerActions
     {
         void OnPrimaryClick(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1201,6 +1258,7 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
     }
     public interface IInventoryActions
     {

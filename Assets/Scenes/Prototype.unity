@@ -275,6 +275,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1121236182508220506, guid: e8549b409d7ac2f4dab5818b9d5c309c, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2980961468618403306, guid: e8549b409d7ac2f4dab5818b9d5c309c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -343,6 +347,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: RightHand
       objectReference: {fileID: 0}
+    - target: {fileID: 2980961468628282012, guid: e8549b409d7ac2f4dab5818b9d5c309c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e3ce6c753eb848f4da84af4ffd8d3d53, type: 2}
+    - target: {fileID: 2980961468628282012, guid: e8549b409d7ac2f4dab5818b9d5c309c, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 009a340ea743c464da13c08b526058b5, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8549b409d7ac2f4dab5818b9d5c309c, type: 3}
 --- !u!1001 &302005313
@@ -1621,7 +1633,7 @@ MonoBehaviour:
   repathRate: 0.25
   canSearch: 1
   canMove: 1
-  maxSpeed: 4
+  maxSpeed: 1
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -1636,7 +1648,7 @@ MonoBehaviour:
   pickNextWaypointDist: 2
   endReachedDistance: 0.2
   alwaysDrawGizmos: 0
-  slowWhenNotFacingTarget: 1
+  slowWhenNotFacingTarget: 0
   whenCloseToDestination: 0
   constrainInsideGraph: 0
 --- !u!114 &1873010389
@@ -1761,6 +1773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000e0e4de893841449fe1b6a91171712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _container: {fileID: 11400000, guid: 414a438c833562b48a5b74c9df13101e, type: 2}
   ProjectileWeapon: {fileID: 11400000, guid: a55292883e4f9b045b4a4357bedc8f85, type: 2}
 --- !u!4 &1873010392 stripped
 Transform:
