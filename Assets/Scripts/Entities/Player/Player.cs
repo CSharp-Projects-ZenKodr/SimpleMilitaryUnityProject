@@ -1,8 +1,7 @@
 ﻿using Entity_Systems;
-using Entity_Systems.Player.Handlers;
+using Entity_Systems.Player;
 using Interfaces;
 using Items.Weapons;
-using UnityEngine;
 
 namespace Entities.Player {
     /// <summary>
@@ -17,9 +16,9 @@ namespace Entities.Player {
         
         #region Private Fields & Properties
 
-        private PlayerInputControlsRevised _inputControls;
         private Combat _combat;
         private Equipment _equipment;
+        private InputController _inputController;
 
         #endregion
 
@@ -35,13 +34,13 @@ namespace Entities.Player {
         protected override void OnEnable() {
             base.OnEnable();
             
-            _inputControls.Enable();
+            _inputController.Enable();
         }
 
         protected override void OnDisable() {
             base.OnDisable();
             
-            _inputControls.Disable();
+            _inputController.Disable();
         }
 
         /// <summary>
@@ -50,17 +49,14 @@ namespace Entities.Player {
         protected override void CreateAgentSpecificDependencies() {
             _combat = new Combat();
             _equipment = new Equipment();
-            _inputControls = new PlayerInputControlsRevised();
-            _inputStateHandler = new InputStateHandler();
+            _inputController = new InputController();
         }
 
         /// <summary>
         /// Will initialize or put agent specific systems into a valid and functional state
         /// </summary>
         protected override void InitializeAgentSpecificDependencies() {
-            _inputControls.Player.SetCallbacks(this);
-            _inputControls.Locomotion.SetCallbacks(this);
-            _inputControls.Inventory.SetCallbacks(this);
+
         }
 
         #endregion
@@ -68,35 +64,12 @@ namespace Entities.Player {
         #region Public Methods - Initializations - Interfaces
         
         public void SubscribeToSubSystemEvents() {
-            _locomotion.SubToOnTargetReach(OnTargetReached);
+            _inputController.PlayerActions.Actions.PrimaryClick.performed += _ =>
+                _inputController.PlayerActions.OnPrimaryClick(_raycasting, _locomotion, _pathing);
+            _inputController.LocomotionActions.Actions.Run.performed += _ =>
+                _inputController.LocomotionActions.OnRun(_locomotion, _animationBrain);
         }
         
-        #endregion
-
-        #region Private Methods - Event Subscribers Via Interfaces
-        
-        /// <summary>
-        /// Once pathfinding destination is reached, this method will set the animator speed to 'idle'
-        /// </summary>
-        private void OnTargetReached() {
-            _locomotion.MaxSpeed = 2.0f;
-            _locomotion.CanSearch = false;
-        }
-        
-        #endregion
-
-        #region Private Methods
-
-        /// <summary>
-        /// Will be called if a Player agent clicks on a terrain collider and has an accessible path to the
-        /// RaycastHit point. Sets the animation to walk. If the agent is not walking, sets to running (implied)
-        /// </summary>
-        /// <param name="raycastHit">The raycast from where the mouse was clicked to the terrain collider</param>
-        private void MoveToTerrainVector(RaycastHit raycastHit) {
-            _locomotion.CanSearch = true;
-            _locomotion.SetDestinationAndSearchPathNonNormalized(_pathing.GetNodeDestination(raycastHit.point));
-        }
-       
         #endregion
     }
 }

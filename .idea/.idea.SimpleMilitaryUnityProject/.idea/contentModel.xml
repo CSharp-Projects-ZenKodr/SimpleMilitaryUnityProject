@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\uidq0628\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\uidq0628\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SimpleMilitaryUnityProject.193152727.00" t="ExcludeRecursive" />
-    <e p="C:\Users\uidq0628\Documents\GitHub\SimpleMilitaryUnityProject" t="IncludeRecursive">
+    <e p="C:\Users\stane\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\stane\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SimpleMilitaryUnityProject.620703417.00" t="ExcludeRecursive" />
+    <e p="C:\Users\stane\Documents\GitHub\SimpleMilitaryUnityProject" t="IncludeRecursive">
       <e p="Animancer.csproj" t="IncludeRecursive" />
       <e p="Animancer.Examples.csproj" t="IncludeRecursive" />
       <e p="Animancer.FSM.csproj" t="IncludeRecursive" />
@@ -702,17 +702,6 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="Animation" t="Include">
-            <e p="AnimationAgentActions.cs" t="Include" />
-            <e p="AnimationDataContainers" t="Include">
-              <e p="AnimDataContainer.cs" t="Include" />
-            </e>
-            <e p="AnimationIdleStates.cs" t="Include" />
-            <e p="AnimationParameterStatics.cs" t="Include" />
-            <e p="AnimationWeaponTypes.cs" t="Include" />
-            <e p="AnimatorInitializer.cs" t="Include" />
-            <e p="AnimId.cs" t="Include" />
-          </e>
           <e p="CameraHelper" t="Include">
             <e p="MainCameraController.cs" t="Include" />
           </e>
@@ -729,15 +718,27 @@
             <e p="Locomotion.cs" t="Include" />
             <e p="Pathing.cs" t="Include" />
             <e p="Player" t="Include">
-              <e p="Handlers" t="Include">
-                <e p="InputStateHandler.cs" t="Include" />
-              </e>
               <e p="InputController.cs" t="Include" />
+              <e p="InputControllerSubSystems" t="Include">
+                <e p="InventoryActions.cs" t="Include" />
+                <e p="LocomotionActions.cs" t="Include" />
+                <e p="PlayerActions.cs" t="Include" />
+              </e>
             </e>
             <e p="Raycasting.cs" t="Include" />
             <e p="Skeleton.cs" t="Include" />
             <e p="Subsystems" t="Include">
-              <e p="AnimationLocomotionController.cs" t="Include" />
+              <e p="Animation" t="Include">
+                <e p="AnimationDataContainers" t="Include">
+                  <e p="AnimDataContainer.cs" t="Include" />
+                </e>
+                <e p="AnimationLocomotionController.cs" t="Include" />
+                <e p="Helpers" t="Include">
+                  <e p="AnimationParameterStatics.cs" t="Include" />
+                  <e p="AnimationWeaponTypes.cs" t="Include" />
+                  <e p="AnimId.cs" t="Include" />
+                </e>
+              </e>
             </e>
           </e>
           <e p="Generics" t="Include">
@@ -749,12 +750,21 @@
             <e p="TagHelper.cs" t="Include" />
           </e>
           <e p="Interfaces" t="Include">
-            <e p="IOnAwake.cs" t="Include" />
-            <e p="IOnDisable.cs" t="Include" />
-            <e p="IOnEnable.cs" t="Include" />
-            <e p="IOnStart.cs" t="Include" />
-            <e p="IOnUpdate.cs" t="Include" />
-            <e p="ISubscribeToSubSystemEvents.cs" t="Include" />
+            <e p="FauxMonoMethods" t="Include">
+              <e p="IOnDisable.cs" t="Include" />
+              <e p="IOnUpdate.cs" t="Include" />
+            </e>
+            <e p="HumanControlAndInput" t="Include">
+              <e p="IActions.cs" t="Include" />
+              <e p="IEquipmentActions.cs" t="Include" />
+              <e p="IInventoryActions.cs" t="Include" />
+            </e>
+            <e p="Initializations" t="Include">
+              <e p="IOnAwake.cs" t="Include" />
+              <e p="IOnEnable.cs" t="Include" />
+              <e p="IOnStart.cs" t="Include" />
+              <e p="ISubscribeToSubSystemEvents.cs" t="Include" />
+            </e>
             <e p="Weapons" t="Include">
               <e p="IAbility.cs" t="Include" />
               <e p="IFire.cs" t="Include" />

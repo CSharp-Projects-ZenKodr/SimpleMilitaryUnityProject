@@ -56,6 +56,8 @@ namespace Entity_Systems {
             _ai = ai;
             _minSpeed = minSpeed;
             _maxSpeed = maxSpeed;
+            
+            SubToOnTargetReach(OnTargetReached);
         }
 
         #endregion
@@ -72,6 +74,18 @@ namespace Entity_Systems {
 
         public float GetCurrentSpeed() {
             return _ai.velocity.magnitude;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Once pathfinding destination is reached, this method will set the animator speed to 'idle'
+        /// </summary>
+        private void OnTargetReached() {
+            MaxSpeed = 2.0f;
+            CanSearch = false;
         }
 
         #endregion

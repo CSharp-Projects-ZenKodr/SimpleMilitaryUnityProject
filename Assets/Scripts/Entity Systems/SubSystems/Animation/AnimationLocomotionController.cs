@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Animancer;
 using Animation;
+using Entity_Systems.SubSystems.Animation.Helpers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Entity_Systems.SubSystems {
+namespace Entity_Systems.SubSystems.Animation {
     public class AnimationLocomotionController {
         #region Properties 
 

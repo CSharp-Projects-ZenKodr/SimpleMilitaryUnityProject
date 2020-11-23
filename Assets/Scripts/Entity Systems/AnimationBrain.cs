@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Animancer;
 using Animation;
-using Animation.AnimationDataContainers;
 using Entity_Systems.SubSystems;
+using Entity_Systems.SubSystems.Animation;
+using Entity_Systems.SubSystems.Animation.AnimationDataContainers;
+using Entity_Systems.SubSystems.Animation.Helpers;
 using Interfaces;
 using UnityEngine;
 

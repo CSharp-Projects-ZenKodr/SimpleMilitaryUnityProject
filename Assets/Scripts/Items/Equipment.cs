@@ -5,7 +5,7 @@ namespace Items {
     public class Equipment : ScriptableObject {
         #region Insantiation Fields For Display
 
-        [SerializeField] private AssetReference _prefabReference;
+        [SerializeField] private AssetReference _prefabReference = null;
 
         #endregion
 

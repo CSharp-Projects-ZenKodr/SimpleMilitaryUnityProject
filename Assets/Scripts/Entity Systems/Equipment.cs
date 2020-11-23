@@ -33,14 +33,6 @@ namespace Entity_Systems {
            
             projectileWeapon.InstantiateAssetReference(jointToAssignTo);
         }
-
-        public void DrawWeapon() {
-            
-        }
-
-        public void HolsterWeapon() {
-            
-        }
         
         #endregion
     }

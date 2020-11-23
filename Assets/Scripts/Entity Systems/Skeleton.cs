@@ -10,14 +10,14 @@ namespace Entity_Systems {
         #endregion
 
         #region Constructor
-
+        
         public Skeleton(GameObject _gameObject) {
             _agentGameObject = _gameObject;
         }
         
        #endregion
        
-       #region Public Methods
+        #region Public Methods
 
        /// <summary>
        /// Returns the transform of the input game object

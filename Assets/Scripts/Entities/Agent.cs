@@ -1,6 +1,6 @@
 ﻿using Animancer;
-using Animation.AnimationDataContainers;
 using Entity_Systems;
+using Entity_Systems.SubSystems.Animation.AnimationDataContainers;
 using Pathfinding;
 using UnityEngine;
 

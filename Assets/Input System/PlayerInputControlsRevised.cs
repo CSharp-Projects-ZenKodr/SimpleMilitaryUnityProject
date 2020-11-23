@@ -949,7 +949,10 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
     {
         private @PlayerInputControlsRevised m_Wrapper;
         public PlayerActions(@PlayerInputControlsRevised wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PrimaryClick => m_Wrapper.m_Player_PrimaryClick;
+        public InputAction @PrimaryClick {
+            get => m_Wrapper.m_Player_PrimaryClick;
+        }
+
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }

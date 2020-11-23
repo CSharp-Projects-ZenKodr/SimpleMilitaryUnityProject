@@ -5,12 +5,12 @@ using Animancer;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Animation.AnimationDataContainers {
+namespace Entity_Systems.SubSystems.Animation.AnimationDataContainers {
     [CreateAssetMenu(order = 1, fileName = "AnimDataContainer", menuName = "Animations/Containers/AnimDataContainer")]
     public class AnimDataContainer : ScriptableObject {
         #region List of Agent Animations
 
-        [SerializeField] private List<ClipState.Transition> AnimList;
+        [SerializeField] private List<ClipState.Transition> AnimList = new List<ClipState.Transition>();
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace Animation.AnimationDataContainers {
         
         #region IdleAnimationsSequence
 
-        [SerializeField] private List<ClipState.Transition> _idleSequence;
+        [SerializeField] private List<ClipState.Transition> _idleSequence = null;
         public List<ClipState.Transition> IdleSequence => _idleSequence;
 
         #endregion
