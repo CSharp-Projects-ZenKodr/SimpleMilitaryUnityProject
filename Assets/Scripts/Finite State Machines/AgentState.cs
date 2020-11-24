@@ -1,17 +1,26 @@
 ﻿using Animancer.FSM;
 using Entities;
 using Entities.Player;
-using Entity_Systems;
 using UnityEngine;
 
 namespace Finite_State_Machines {
     public abstract class AgentState : StateBehaviour<AgentState>, IOwnedState<AgentState> {
         #region Properties
 
-        protected AnimationBrain _brain;
-        
         protected StateMachine<AgentState> _agentOwnerStateMachine;
         public StateMachine<AgentState> AgentOwnerStateMachine => _agentOwnerStateMachine;
+
+        private Agent _agent;
+        public Agent Agent {
+            get => _agent;
+            set {
+                if (_agent != null && _agent.StateMachine.CurrentState == this) {
+                    // Force to a default state here
+                }
+
+                _agent = value;
+            }
+        }
 
         #endregion
 
@@ -30,7 +39,6 @@ namespace Finite_State_Machines {
             if (agent is Player) {
                 var playerAgent = agent as Player;
 
-                _brain = playerAgent.AnimationBrain;
                 Debug.Log($"Agent brain set to type 'Player' from {this.name} Monobehaviour");
             }
             // Add conditions for other various Agent Brains
@@ -39,5 +47,6 @@ namespace Finite_State_Machines {
         }
 
         #endregion
+
     }
-}
+} 

@@ -1,6 +1,10 @@
-﻿using Animancer;
+﻿using System;
+using System.Collections.Generic;
+using Animancer;
+using Animancer.FSM;
 using Entity_Systems;
 using Entity_Systems.SubSystems.Animation.AnimationDataContainers;
+using Finite_State_Machines;
 using Pathfinding;
 using UnityEngine;
 
@@ -22,19 +26,27 @@ namespace Entities {
         protected Raycasting _raycasting;    // Handles all raycasting required by agent
         protected Locomotion _locomotion;    // Controls speed, direction, location, locomotion, etc.
         protected Skeleton _skeleton;    // Provides access to the join system of the agent's prefab model
+        protected AnimationBrain _animationBrain;
 
         #endregion
 
-        #region SerializeFields - Animation Related
-
+        #region SerializeFields & Properties - Animation Related
+        
         [SerializeField] protected AnimDataContainer _container = null;
         public AnimDataContainer Container => _container;
         
         #endregion
 
-        #region SerializedFields - State Machine - States
+        #region SerializedFields - State Machine
 
-        //[SerializeField] protected 
+        [SerializeField] private List<AgentState> _agentStates;
+        public StateMachine<AgentState> StateMachine { get; private set; }
+
+        #endregion
+
+        #region Delegate Definitions
+
+        private Action _forceEnterIdleState;    // Every Agent base animation state should start out in 'Idle'
 
         #endregion
         
@@ -51,6 +63,10 @@ namespace Entities {
             _raycasting = new Raycasting(Camera.main);
             _locomotion = new Locomotion(tr, GetComponent<AIPath>());
             _skeleton = new Skeleton(gameObject);
+            _animationBrain = new AnimationBrain(GetComponent<AnimancerComponent>(), _container, GetComponent<Animator>());
+            
+            StateMachine = new StateMachine<AgentState>();
+            StateMachine.ForceSetState(_agentStates[0]);            
         }
 
         /// <summary>
@@ -66,6 +82,11 @@ namespace Entities {
             
         }
 
+        #endregion
+
+        #region Protected Abstract Methods
+
+        
         /// <summary>
         /// Handles population of any dependencies that are specific to that agent
         /// </summary>
@@ -76,15 +97,10 @@ namespace Entities {
         /// Should put the system into a valid state
         /// </summary>
         protected abstract void InitializeAgentSpecificDependencies();
-        
+
         #endregion
 
         #region Private Methods
-
-        /// <summary>
-        /// Updates the agent's locomotion animations
-        /// </summary>
-        protected virtual void Update() { }
         
         /// <summary>
         /// Realigns the animator gameobject transform with the parnte gameobject's transform

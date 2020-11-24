@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\uidq0628\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\uidq0628\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SimpleMilitaryUnityProject.193152727.00" t="ExcludeRecursive" />
-    <e p="C:\Users\uidq0628\Documents\GitHub\SimpleMilitaryUnityProject" t="IncludeRecursive">
+    <e p="C:\Users\stane\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\stane\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SimpleMilitaryUnityProject.620703417.00" t="ExcludeRecursive" />
+    <e p="C:\Users\stane\Documents\GitHub\SimpleMilitaryUnityProject" t="IncludeRecursive">
       <e p="Animancer.csproj" t="IncludeRecursive" />
       <e p="Animancer.Examples.csproj" t="IncludeRecursive" />
       <e p="Animancer.FSM.csproj" t="IncludeRecursive" />
@@ -718,13 +718,6 @@
             <e p="InputBrain.cs" t="Include" />
             <e p="Locomotion.cs" t="Include" />
             <e p="Pathing.cs" t="Include" />
-            <e p="Player" t="Include">
-              <e p="InputControllerSubSystems" t="Include">
-                <e p="InventoryActions.cs" t="Include" />
-                <e p="LocomotionActions.cs" t="Include" />
-                <e p="PlayerActions.cs" t="Include" />
-              </e>
-            </e>
             <e p="Raycasting.cs" t="Include" />
             <e p="Skeleton.cs" t="Include" />
             <e p="Subsystems" t="Include">

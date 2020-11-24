@@ -1,5 +1,4 @@
-﻿using Entity_Systems.Player.InputControllerSubSystems;
-using Generics;
+﻿using Generics;
 using UnityEngine;
 
 namespace Entity_Systems {
@@ -7,17 +6,17 @@ namespace Entity_Systems {
         #region Private Fields
 
         private PlayerInputControlsRevised _inputControls;
-        private PlayerActions _playerActions;
-        private LocomotionActions _locomotionActions;
-        private InventoryActions _inventoryActions;
+        private PlayerInputControlsRevised.PlayerActions _playerActions;
+        private PlayerInputControlsRevised.LocomotionActions _locomotionActions;
+        private PlayerInputControlsRevised.InventoryActions _inventoryActions;
 
         #endregion
 
-        #region Public Fields
+        #region Public Fields 
 
-        public PlayerActions PlayerActions => _playerActions;
-        public LocomotionActions LocomotionActions => _locomotionActions;
-        public InventoryActions InventoryActions => _inventoryActions;
+        public PlayerInputControlsRevised.PlayerActions PlayerActions => _playerActions;
+        public PlayerInputControlsRevised.LocomotionActions LocomotionActions => _locomotionActions;
+        public PlayerInputControlsRevised.InventoryActions InventoryActions => _inventoryActions;
         
         #endregion
         
@@ -50,9 +49,9 @@ namespace Entity_Systems {
         /// </summary>
         protected override void CreateDependencies() {
             _inputControls = new PlayerInputControlsRevised();
-            _playerActions = new PlayerActions(_inputControls.Player);
-            _locomotionActions = new LocomotionActions(_inputControls.Locomotion);
-            _inventoryActions = new InventoryActions(_inputControls.Inventory);
+            _playerActions = _inputControls.Player;
+            _locomotionActions = _inputControls.Locomotion;
+            _inventoryActions = _inputControls.Inventory;
         }
         
         #endregion

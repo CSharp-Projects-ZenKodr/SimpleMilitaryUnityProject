@@ -1,8 +1,11 @@
-﻿using Animancer;
-using Entity_Systems;
+﻿using Entity_Systems;
+using Entity_Systems.SubSystems.Animation.Helpers;
+using Helpers;
 using Interfaces;
 using Items.Weapons;
+using Static_Helpers;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Entities.Player {
     /// <summary>
@@ -12,13 +15,6 @@ namespace Entities.Player {
         #region DEBUGGING FIELDS
 
         public ProjectileWeapon ProjectileWeapon;
-
-        #endregion
-
-        #region Properties
-
-        private AnimationBrain _animationBrain;
-        public AnimationBrain AnimationBrain => _animationBrain;
 
         #endregion
         
@@ -56,9 +52,6 @@ namespace Entities.Player {
         protected override void CreateAgentSpecificDependencies() {
             _combat = new Combat();
             _equipment = new Equipment();
-            _animationBrain = new AnimationBrain(GetComponent<AnimancerComponent>(),
-                _container,
-                GetComponent<Animator>());
         }
 
         /// <summary>
@@ -68,13 +61,14 @@ namespace Entities.Player {
 
         #endregion
         
-        #region Public Methods - Initializations - Interfaces
+        #region Initializations - Interfaces - System Event Subscription
         
         public void SubscribeToSubSystemEvents() {
-            _inputBrain.PlayerActions.Actions.PrimaryClick.performed += _ =>
-                _inputBrain.PlayerActions.OnPrimaryClick(_raycasting, _locomotion, _pathing);
-            _inputBrain.LocomotionActions.Actions.Run.performed += _ =>
-                _inputBrain.LocomotionActions.OnRun(_locomotion, _animationBrain);
+            _inputBrain.PlayerActions.PrimaryClick.performed += InteractWithPrimaryClick;
+            _inputBrain.LocomotionActions.Run.performed += InteractWithRun;
+            _inputBrain.InventoryActions.InventoryOne.performed += InteractWithInventoryOne;
+            
+            _locomotion.RegisterDelegateToAiOnPathComplete(InteractWithOnDestinationReached);
         }
 
         #endregion
@@ -90,17 +84,91 @@ namespace Entities.Player {
             transform.position += _animationBrain.QueryController.QueryAnimatorDeltaPosition();
         }
 
-        /// <summary>
-        /// See <see cref="AnimationBrain"/>
-        /// </summary>
-        protected override void Update() {
-            base.Update();
-            var speed = _locomotion.GetCurrentSpeed();
-            
-            _animationBrain.LocomotionController.UpdateLocomotionAnimation(speed, _container);
+        // /// <summary>
+        // /// See <see cref="AnimationBrain"/>
+        // /// </summary>
+        // protected override void Update() {
+        //     base.Update();
+        //     var speed = _locomotion.GetCurrentSpeed();
+        //     
+        //     _animationBrain.LocomotionController.UpdateLocomotionAnimation(speed, _container, _animationBrain);
+        //
+        // }
+        
+        #endregion
+        
+        #region Private Methods - Utilization of Agent's Systems - Input Brain
 
+        // *************************************************************************************Input Brain Interactions
+        /// <summary>
+        /// Logic for when the 'left-mouse' button is pressed
+        /// </summary>
+        /// <param name="context"></param>
+        private void InteractWithPrimaryClick(InputAction.CallbackContext context) {
+            var raycastHit = _raycasting.GetRaycastOnClick();
+            
+            if (raycastHit == null) return;
+            var castedRaycast = (RaycastHit) raycastHit;
+            
+            if (castedRaycast.collider.CompareTag(TagHelper.TerrainTag)) {
+                HandleRaycastingTerrain(castedRaycast);
+            }
+        }
+
+        /// <summary>
+        /// Logic for when the 'run' button is pressed
+        /// </summary>
+        private void InteractWithRun(InputAction.CallbackContext context) {
+            _locomotion.Speed = 4.0f;
+            _locomotion.IsRunning = !_locomotion.IsRunning;
+            _animationBrain.Animate(AnimId.Run, 0.1f);
+        }
+
+        /// <summary>
+        /// Logic for when the player reaches their target destination, A* Pathfinding
+        /// </summary>
+        private void InteractWithOnDestinationReached() {
+            _locomotion.Speed = 0.0f;
+            _locomotion. CanSearch = false;
+            _locomotion.IsRunning = false;
+            _animationBrain.Animate(AnimId.Idle);
         }
         
+        /// <summary>
+        /// Logic for when the 'crouch' button is pressed
+        /// </summary>
+        /// <param name="context"></param>
+        private void InteractWithCrouch(InputAction.CallbackContext context) { }
+
+        private void InteractWithInventoryOne(InputAction.CallbackContext context) {
+            _equipment.EquipProjectileWeapon(
+                _skeleton.GetJointTransform(Joints.RightHand),
+                ProjectileWeapon);
+        }
+
+        #endregion
+
+        #region Private Methods - Helpers
+
+        /// <summary>
+        /// Logic for handling a raycast collider with terrain
+        /// Determines if locomotion is running or walk and sets speed/animation accordingly
+        /// </summary>
+        /// <param name="castedRaycast"></param>
+        private void HandleRaycastingTerrain(RaycastHit castedRaycast) {
+            if (_locomotion.IsRunning) {
+                _locomotion.Speed = 4.0f;
+                _animationBrain.Animate(AnimId.Run);
+            }
+            else {
+                _locomotion.Speed = 2.0f;
+                _animationBrain.Animate(AnimId.Walk);
+            }
+
+            _locomotion.CanSearch = true;
+            _locomotion.SetDestinationAndSearchPathNonNormalized(_pathing.GetNodeDestination(castedRaycast.point));
+        }
+
         #endregion
     }
 }

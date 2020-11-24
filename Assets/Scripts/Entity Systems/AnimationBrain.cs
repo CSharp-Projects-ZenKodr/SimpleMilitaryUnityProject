@@ -13,15 +13,14 @@ namespace Entity_Systems {
     public class AnimationBrain : IOnEnable {
         #region Dependencies
 
-        protected readonly AnimDataContainer _container;
-        protected readonly Animator _animator;
+        private readonly AnimDataContainer _container;
+        private readonly Animator _animator;
         
         #endregion
         
         #region Public Helper Classes
         
         public readonly AnimancerComponent Animancer;
-        public readonly AnimationLocomotionController LocomotionController;
         public readonly AnimationQueryController QueryController;
         
         #endregion
@@ -33,8 +32,7 @@ namespace Entity_Systems {
             Animancer = animancer;
             _container = container;
             _animator = animator;
-            LocomotionController = new AnimationLocomotionController(this, container);
-            QueryController = new AnimationQueryController(animancer, _animator);
+            QueryController = new AnimationQueryController(animator, container);
             
             Debug.Assert(container.IdleSequence.Count > 1, "Idle sequence must have at least 1 element");
         }

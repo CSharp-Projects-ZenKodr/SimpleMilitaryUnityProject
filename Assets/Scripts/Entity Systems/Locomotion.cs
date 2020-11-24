@@ -16,9 +16,9 @@ namespace Entity_Systems {
         #region Properties
 
         /// <summary>
-        /// Sets & gets the AIPath.MaxSpeed property.
+        /// Sets & gets the AIPath.Speed property.
         /// </summary>
-        public float MaxSpeed {
+        public float Speed {
             get => _ai.maxSpeed;
             set {
                 if (value < _minSpeed || value > _maxSpeed) {
@@ -30,34 +30,23 @@ namespace Entity_Systems {
                 _ai.maxSpeed = value;
             }
         }
+        
         public bool CanSearch {
             get => _ai.canSearch;
             set => _ai.canSearch = value;
         }
 
-        #endregion
-
-        #region Event Subscription
-    
-        /// <summary>
-        /// Pass any delegates that should be invoked when the Agent reaches it's target destination
-        /// </summary>
-        /// <param name="delegate">Delegate to subscribe to OnTargetReachedDelegate</param>
-        public void SubToOnTargetReach(AIPath.OnTargetReachedDelegate @delegate) {
-            _ai.onTargetReached += @delegate;
-        }
+        public bool IsRunning { get; set; }
 
         #endregion
         
         #region Constructor
 
-        public Locomotion(Transform transform, AIPath ai, float minSpeed = 2.0f, float maxSpeed = 4.0f) {
+        public Locomotion(Transform transform, AIPath ai, float minSpeed = 0f, float maxSpeed = 4.0f) {
             _transform = transform;
             _ai = ai;
             _minSpeed = minSpeed;
             _maxSpeed = maxSpeed;
-            
-            SubToOnTargetReach(OnTargetReached);
         }
 
         #endregion
@@ -72,20 +61,20 @@ namespace Entity_Systems {
             _ai.SearchPath();
         }
 
+        /// <summary>
+        /// Returns the AI Path's current speed
+        /// </summary>
+        /// <returns></returns>
         public float GetCurrentSpeed() {
             return _ai.velocity.magnitude;
         }
 
-        #endregion
-
-        #region Private Methods
-
         /// <summary>
-        /// Once pathfinding destination is reached, this method will set the animator speed to 'idle'
+        /// Register methods to the onTargetReached Action
         /// </summary>
-        private void OnTargetReached() {
-            MaxSpeed = 2.0f;
-            CanSearch = false;
+        /// <param name="delegate">Subscribing method</param>
+        public void RegisterDelegateToAiOnPathComplete(AIPath.OnTargetReachedDelegate @delegate) {
+            _ai.onTargetReached += @delegate;
         }
 
         #endregion

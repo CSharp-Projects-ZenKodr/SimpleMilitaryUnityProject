@@ -28,17 +28,5 @@ namespace Entity_Systems {
         }
 
         #endregion
-
-        #region Public Query Methods
-
-        /// <summary>
-        /// Returns _seeker instance. Useful for subscribing to OnPathComplete callbacks
-        /// </summary>
-        /// <returns></returns>
-        public Seeker GetSeeker() {
-            return _seeker;
-        }
-
-        #endregion
     }
 }
