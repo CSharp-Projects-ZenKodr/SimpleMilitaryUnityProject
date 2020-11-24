@@ -2,29 +2,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using Animancer;
-using Animation;
+using Entity_Systems.SubSystems.Animation.AnimationDataContainers;
 using Entity_Systems.SubSystems.Animation.Helpers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Entity_Systems.SubSystems.Animation {
     public class AnimationLocomotionController {
-        #region Properties 
-
-        private readonly AnimationBrain _brain;
-
-        #endregion
-
         #region Private Fields
 
+        private readonly AnimationBrain _brain;
+        private readonly AnimDataContainer _container;
         private Coroutine _idleSequenceCoroutine = null;
+        private readonly List<Action> _callBackActions = new List<Action>();
 
         #endregion
         
         #region Constructor
 
-        public AnimationLocomotionController(AnimationBrain animationBrain) {
+        public AnimationLocomotionController(AnimationBrain animationBrain, AnimDataContainer container) {
             _brain = animationBrain;
+            _container = container;
+            _callBackActions.Add( () => StartIdleSequence(container));   
         }
 
         #endregion
@@ -35,7 +34,7 @@ namespace Entity_Systems.SubSystems.Animation {
         /// Updates the agent's locomotion animations. Attempt to blend from walk to run and run to walk.
         /// </summary>
         /// <param name="relativeSpeed">Relative locomotion velocity magnitude</param>
-        public void UpdateLocomotionAnimation(float relativeSpeed) {
+        public void UpdateLocomotionAnimation(float relativeSpeed, AnimDataContainer container) {
             if (relativeSpeed <= 0.001f) {
                 _brain.Animate(AnimId.Idle);
 
@@ -45,12 +44,12 @@ namespace Entity_Systems.SubSystems.Animation {
             ClipState.Transition outAnim = null, playAnim = null;
 
             if (relativeSpeed > 0.001f && relativeSpeed <= 2.0f) {
-                playAnim = _brain.QueryDataContainer(AnimId.Walk);
+                playAnim = _brain.QueryController.QueryDataContainer(AnimId.Walk, container);
                 //outAnim = _brain.QueryDataContainer(AnimId.Run);
             }
             
             else if (relativeSpeed > 3.0f) {
-                playAnim = _brain.QueryDataContainer(AnimId.Run);
+                playAnim = _brain.QueryController.QueryDataContainer(AnimId.Run, container);
                 //outAnim = _brain.QueryDataContainer(AnimId.Walk);
             }
 
@@ -60,7 +59,7 @@ namespace Entity_Systems.SubSystems.Animation {
            // _brain.AnimancerTryGet(out var outState, playState, playAnim, outAnim);
             
            
-            // if (_brain._animancer.States.TryGet(outAnim, out var outState) 
+            // if (_brain.Animancer.States.TryGet(outAnim, out var outState) 
             //     
             //     && outState.IsPlaying)
             //     playState.NormalizedTime = outState.NormalizedTime;
@@ -70,11 +69,11 @@ namespace Entity_Systems.SubSystems.Animation {
         /// Stops the current idle sequence coroutine (if not null)
         /// Starts a new instance of idle sequence coroutine
         /// </summary>
-        public void StartIdleSequence() {
+        public void StartIdleSequence(AnimDataContainer container) {
             ResetIdleCr();
             _brain.Animate(AnimId.Idle);
 
-            _brain.StartCoroutine(out _idleSequenceCoroutine,StartIdleAnimationSequenceCr());
+            _idleSequenceCoroutine = _brain.Animancer.StartCoroutine(StartIdleAnimationSequenceCr(container));
         }
 
         #endregion
@@ -85,14 +84,14 @@ namespace Entity_Systems.SubSystems.Animation {
         /// Generates random time for idle animation actions to play
         /// </summary>
         /// <returns></returns>
-        private IEnumerator StartIdleAnimationSequenceCr() {
+        private IEnumerator StartIdleAnimationSequenceCr(AnimDataContainer container) {
             var randomTime = Random.Range(5.0f, 12.0f);
-            var randomIdleClipToPlay = Random.Range(1, _brain.QueryDataContainerIdleListCount());
+            var randomIdleClipToPlay = Random.Range(1, _brain.QueryController.QueryDataContainerIdleListCount(container));
 
             yield return new WaitForSeconds(randomTime);
 
-            var clipToPlay = _brain.QueryDataContainerIdleList(randomIdleClipToPlay);
-            _brain.Animate(out var state, clipToPlay, 0.25f, new List<Action> {StartIdleSequence});
+            var clipToPlay = _brain.QueryController.QueryDataContainerIdleList(randomIdleClipToPlay, container);
+            _brain.Animate(out var state, clipToPlay, 0.25f, _callBackActions);
 
             yield return state;
         }

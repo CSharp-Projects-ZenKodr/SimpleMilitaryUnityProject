@@ -44,7 +44,7 @@ namespace Animancer.Examples.StateMachines.Platformer
 
         /************************************************************************************************************************/
 
-        public FSM.StateMachine<CreatureState> OwnerStateMachine => _Creature.StateMachine;
+        public FSM.StateMachine<CreatureState> AgentOwnerStateMachine => _Creature.StateMachine;
 
         /************************************************************************************************************************/
     }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace Generics {
-    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
+    public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
         #region Private Static Fields
         
         // This will check if the singleton is about to be destory
@@ -44,6 +44,15 @@ namespace Generics {
             }
         }
 
+        #region Virtual Override Methods
+
+        /// <summary>
+        /// A method to allow creation of dependencies in the Awake() method
+        /// </summary>
+        protected virtual void CreateDependencies() {}
+
+        #endregion
+        
         #region Private Methods
 
         private void OnApplicationQuit() {

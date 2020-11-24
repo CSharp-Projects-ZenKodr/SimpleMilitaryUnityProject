@@ -25,15 +25,16 @@ namespace Entities {
 
         #endregion
 
-        #region Protected/Private Fields & Properties - Animation Related
+        #region SerializeFields - Animation Related
 
-        protected AnimationBrain _animationBrain;    // Handles all animations related to the agent
+        [SerializeField] protected AnimDataContainer _container = null;
+        public AnimDataContainer Container => _container;
         
         #endregion
 
-        #region SerializeFields - Animation Related
+        #region SerializedFields - State Machine - States
 
-        [SerializeField] private AnimDataContainer _container = null;
+        //[SerializeField] protected 
 
         #endregion
         
@@ -50,29 +51,18 @@ namespace Entities {
             _raycasting = new Raycasting(Camera.main);
             _locomotion = new Locomotion(tr, GetComponent<AIPath>());
             _skeleton = new Skeleton(gameObject);
-            _animationBrain = new AnimationBrain(GetComponent<AnimancerComponent>(),
-                _container,
-                GetComponent<Animator>());
         }
 
         /// <summary>
         /// Called after Awake. Should put the agent in a valid state; i.e. 'enable' any dependecies
         /// </summary>
         protected virtual void OnEnable() {
-            _animationBrain.Enable();
         }
 
         /// <summary>
         /// Exact opposite of OnEnable()
         /// </summary>
         protected virtual void OnDisable() {
-            
-        }
-
-        /// <summary>
-        /// Not currently being implemented
-        /// </summary>
-        protected virtual void Start() {
             
         }
 
@@ -94,16 +84,12 @@ namespace Entities {
         /// <summary>
         /// Updates the agent's locomotion animations
         /// </summary>
-        private void Update() {
-            _animationBrain.Update(_locomotion.GetCurrentSpeed());
-        }
+        protected virtual void Update() { }
         
         /// <summary>
         /// Realigns the animator gameobject transform with the parnte gameobject's transform
         /// </summary>
-        private void OnAnimatorMove() {
-            transform.position += _animationBrain.QueryAnimatorDeltaPosition();
-        }
+        protected virtual void OnAnimatorMove() { }
 
         #endregion
     }

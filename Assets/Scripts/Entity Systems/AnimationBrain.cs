@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Animancer;
-using Animation;
-using Entity_Systems.SubSystems;
 using Entity_Systems.SubSystems.Animation;
 using Entity_Systems.SubSystems.Animation.AnimationDataContainers;
 using Entity_Systems.SubSystems.Animation.Helpers;
@@ -15,10 +13,16 @@ namespace Entity_Systems {
     public class AnimationBrain : IOnEnable {
         #region Dependencies
 
-        private readonly AnimancerComponent _animancer;
-        private readonly AnimDataContainer _container;
-        private readonly AnimationLocomotionController _locomotionController;
-        private readonly Animator _animator;
+        protected readonly AnimDataContainer _container;
+        protected readonly Animator _animator;
+        
+        #endregion
+        
+        #region Public Helper Classes
+        
+        public readonly AnimancerComponent Animancer;
+        public readonly AnimationLocomotionController LocomotionController;
+        public readonly AnimationQueryController QueryController;
         
         #endregion
 
@@ -26,10 +30,11 @@ namespace Entity_Systems {
 
         public AnimationBrain(AnimancerComponent animancer, AnimDataContainer container, 
                 Animator animator) {
-            _animancer = animancer;
+            Animancer = animancer;
             _container = container;
             _animator = animator;
-            _locomotionController = new AnimationLocomotionController(this);
+            LocomotionController = new AnimationLocomotionController(this, container);
+            QueryController = new AnimationQueryController(animancer, _animator);
             
             Debug.Assert(container.IdleSequence.Count > 1, "Idle sequence must have at least 1 element");
         }
@@ -42,7 +47,7 @@ namespace Entity_Systems {
         /// Set the Animancer to 'idle' on game start
         /// </summary>
         public void Enable() {
-            Animate(AnimId.Idle);
+            //Animate(AnimId.Idle);
             
             Debug.Assert(_container.IdleSequence.First().Clip.isLooping);    // Idle animations SHOULD be looping
             Debug.Assert(_container.IdleSequence.Count > 1);    // A sequence should be greater than 1 element
@@ -62,7 +67,7 @@ namespace Entity_Systems {
             var clip = _container.Query(animId);
             if (clip == null) return ;
 
-            var state = _animancer.Play(clip, fadeDuration);
+            var state = Animancer.Play(clip, fadeDuration);
             
             if (onEndCallbacks != null) {
                 foreach (var action in onEndCallbacks) {
@@ -84,7 +89,7 @@ namespace Entity_Systems {
             var clip = _container.Query(animId);
             if (clip == null) return null;
 
-            state = _animancer.Play(clip, fadeDuration);
+            state = Animancer.Play(clip, fadeDuration);
             
             if (onEndCallbacks != null) {
                 foreach (var action in onEndCallbacks) {
@@ -96,16 +101,16 @@ namespace Entity_Systems {
         }
 
         /// <summary>
-                 /// The core method for playing animations and generating states 
-                 /// </summary>
-                 /// <param name="animation">The animation clip to play, as ITransition</param>
-                 /// <param name="fadeDuration">Optional: the blend time for the animation</param>
-                 /// <param name="onEndCallbacks">Optional: methods to subscribe to Events.OnEnd</param>
+         /// The core method for playing animations and generating states 
+         /// </summary>
+         /// <param name="animation">The animation clip to play, as ITransition</param>
+         /// <param name="fadeDuration">Optional: the blend time for the animation</param>
+         /// <param name="onEndCallbacks">Optional: methods to subscribe to Events.OnEnd</param>
          public void Animate(ITransition animation, float fadeDuration = 0.25f,
              IEnumerable<Action> onEndCallbacks = null) {
              
              if (animation == null) return ;
-             var state = _animancer.Play(animation, fadeDuration);
+             var state = Animancer.Play(animation, fadeDuration);
              
              if (onEndCallbacks != null) {
                  foreach (var action in onEndCallbacks) {
@@ -126,7 +131,7 @@ namespace Entity_Systems {
             state = null;
             if (animation == null) return null;
             
-            state = _animancer.Play(animation, fadeDuration);
+            state = Animancer.Play(animation, fadeDuration);
             
             if (onEndCallbacks != null) {
                 foreach (var action in onEndCallbacks) {
@@ -136,73 +141,6 @@ namespace Entity_Systems {
 
             return state;
         }
-
-        #endregion
-
-        #region Public Methods - Helper Methods for the Brain
-
-        /// <summary>
-        /// Queries the animation data container to return an animation clip
-        /// </summary>
-        /// <param name="animId">String literal to use in the query</param>
-        /// <returns></returns>
-        public ClipState.Transition QueryDataContainer(string animId) {
-            return _container.Query(animId);
-        }
-
-        /// <summary>
-        /// Queries animation data container idle sequencer and returns in input parameter that matches the list index
-        /// </summary>
-        /// <param name="index">List index value to return</param>
-        /// <returns></returns>
-        public ClipState.Transition QueryDataContainerIdleList(int index) {
-            return _container.IdleSequence[index];
-        }
-
-        /// <summary>
-        /// Queries the agent's animation data container to return the idle sequence list count
-        /// </summary>
-        /// <returns></returns>
-        public int QueryDataContainerIdleListCount() {
-            return _container.IdleSequence.Count;
-        }
-
-        /// <summary>
-        /// Returns the delta between parent transform.position and the prefab transform.position
-        /// </summary>
-        /// <returns></returns>
-        public Vector3 QueryAnimatorDeltaPosition() {
-            return _animator.deltaPosition;
-        }
-
-        /// <summary>
-        /// Updates the agent's locomotion animations
-        /// </summary>
-        /// <param name="speed">The agent's current speed</param>
-        public void Update(float speed) {
-            _locomotionController.UpdateLocomotionAnimation(speed);
-        }
-
-        /// <summary>
-        /// Calls the Monobehaviour method: StartCoroutine
-        /// </summary>
-        /// <param name="startedRoutine">Optional: outputs the started coroutine as a variable</param>
-        /// <param name="routine">The method to start</param>
-        public void StartCoroutine(out Coroutine startedRoutine, IEnumerator routine) {
-            startedRoutine = _animancer.StartCoroutine(routine);
-        }
-
-        // /// <summary>
-        // /// Attempts to blend two animations and sync their normalized time field. 
-        // /// </summary>
-        // /// <param name="outState">The state to out, if it is currently playing</param>
-        // /// <param name="playState">The state Animancer is currently in</param>
-        // /// <param name="playAnim">The assumed clip Animancer is currently playing</param>
-        // /// <param name="tryAnim">The clip to check against; is this clip playing?</param>
-        // public void AnimancerTryGet(out AnimancerState outState, ClipState.Transition tryAnim) {
-        //     if (_animancer.States.TryGet(tryAnim, out outState) && outState.IsPlaying)
-        //         playState.NormalizedTime = outState.NormalizedTime;
-        // }
 
         #endregion
     }

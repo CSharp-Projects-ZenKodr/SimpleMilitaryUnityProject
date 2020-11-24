@@ -1,7 +1,8 @@
-﻿using Entity_Systems;
-using Entity_Systems.Player;
+﻿using Animancer;
+using Entity_Systems;
 using Interfaces;
 using Items.Weapons;
+using UnityEngine;
 
 namespace Entities.Player {
     /// <summary>
@@ -13,12 +14,19 @@ namespace Entities.Player {
         public ProjectileWeapon ProjectileWeapon;
 
         #endregion
+
+        #region Properties
+
+        private AnimationBrain _animationBrain;
+        public AnimationBrain AnimationBrain => _animationBrain;
+
+        #endregion
         
         #region Private Fields & Properties
 
         private Combat _combat;
         private Equipment _equipment;
-        private InputController _inputController;
+        private InputBrain _inputBrain;
 
         #endregion
 
@@ -28,19 +36,18 @@ namespace Entities.Player {
             base.Awake();
             CreateAgentSpecificDependencies();
             InitializeAgentSpecificDependencies();
-            SubscribeToSubSystemEvents();
         }
 
         protected override void OnEnable() {
             base.OnEnable();
             
-            _inputController.Enable();
+            _animationBrain.Enable();
+            _inputBrain = FindObjectOfType<InputBrain>();
+            SubscribeToSubSystemEvents();
         }
 
         protected override void OnDisable() {
             base.OnDisable();
-            
-            _inputController.Disable();
         }
 
         /// <summary>
@@ -49,25 +56,49 @@ namespace Entities.Player {
         protected override void CreateAgentSpecificDependencies() {
             _combat = new Combat();
             _equipment = new Equipment();
-            _inputController = new InputController();
+            _animationBrain = new AnimationBrain(GetComponent<AnimancerComponent>(),
+                _container,
+                GetComponent<Animator>());
         }
 
         /// <summary>
         /// Will initialize or put agent specific systems into a valid and functional state
         /// </summary>
-        protected override void InitializeAgentSpecificDependencies() {
-
-        }
+        protected override void InitializeAgentSpecificDependencies() { }
 
         #endregion
         
         #region Public Methods - Initializations - Interfaces
         
         public void SubscribeToSubSystemEvents() {
-            _inputController.PlayerActions.Actions.PrimaryClick.performed += _ =>
-                _inputController.PlayerActions.OnPrimaryClick(_raycasting, _locomotion, _pathing);
-            _inputController.LocomotionActions.Actions.Run.performed += _ =>
-                _inputController.LocomotionActions.OnRun(_locomotion, _animationBrain);
+            _inputBrain.PlayerActions.Actions.PrimaryClick.performed += _ =>
+                _inputBrain.PlayerActions.OnPrimaryClick(_raycasting, _locomotion, _pathing);
+            _inputBrain.LocomotionActions.Actions.Run.performed += _ =>
+                _inputBrain.LocomotionActions.OnRun(_locomotion, _animationBrain);
+        }
+
+        #endregion
+
+        #region Override Methods - Protected
+
+        /// <summary>
+        /// See <see cref="AnimationBrain"/>
+        /// </summary>
+        protected override void OnAnimatorMove() {
+            base.OnAnimatorMove();
+            
+            transform.position += _animationBrain.QueryController.QueryAnimatorDeltaPosition();
+        }
+
+        /// <summary>
+        /// See <see cref="AnimationBrain"/>
+        /// </summary>
+        protected override void Update() {
+            base.Update();
+            var speed = _locomotion.GetCurrentSpeed();
+            
+            _animationBrain.LocomotionController.UpdateLocomotionAnimation(speed, _container);
+
         }
         
         #endregion

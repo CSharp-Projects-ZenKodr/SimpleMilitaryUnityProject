@@ -1,9 +1,9 @@
-﻿using Static_Helpers;
+﻿using Interfaces.Animations;
+using Static_Helpers;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Entity_Systems.Player.InputControllerSubSystems {
-    public class PlayerActions {
+    public class PlayerActions : IOnPrimaryClick, IOnCrouch {
         #region Public Readonly Fields
 
         public PlayerInputControlsRevised.PlayerActions Actions;
@@ -44,7 +44,7 @@ namespace Entity_Systems.Player.InputControllerSubSystems {
             }
         }
 
-        public void OnCrouch(InputAction.CallbackContext context) {
+        public void OnCrouch() {
             throw new System.NotImplementedException();
         }
         

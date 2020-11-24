@@ -46,7 +46,7 @@ namespace Animancer.Examples.StateMachines.Brains
 
         /************************************************************************************************************************/
 
-        public StateMachine<CreatureState> OwnerStateMachine => _Creature.StateMachine;
+        public StateMachine<CreatureState> AgentOwnerStateMachine => _Creature.StateMachine;
 
         /************************************************************************************************************************/
     }

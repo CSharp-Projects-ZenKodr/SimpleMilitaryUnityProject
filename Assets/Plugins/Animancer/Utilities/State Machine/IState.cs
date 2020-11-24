@@ -31,7 +31,7 @@ namespace Animancer.FSM
     public interface IOwnedState<TState> : IState<TState> where TState : class, IState<TState>
     {
         /// <summary>The <see cref="StateMachine{TState}"/> that this state is used in.</summary>
-        StateMachine<TState> OwnerStateMachine { get; }
+        StateMachine<TState> AgentOwnerStateMachine { get; }
     }
 
     /************************************************************************************************************************/
@@ -50,7 +50,7 @@ namespace Animancer.FSM
     ///     private Creature _Creature;
     ///     public Creature Creature =&gt; _Creature;
     ///     
-    ///     public StateMachine&lt;CreatureState&gt; OwnerStateMachine =&gt; _Creature.StateMachine;
+    ///     public StateMachine&lt;CreatureState&gt; AgentOwnerStateMachine =&gt; _Creature.StateMachine;
     /// }
     /// 
     /// public class CreatureBrain : MonoBehaviour
@@ -138,11 +138,11 @@ namespace Animancer.FSM
 
         /// <summary>
         /// Checks if the specified `state` is the <see cref="StateMachine{TState}.CurrentState"/> in its
-        /// <see cref="IOwnedState{TState}.OwnerStateMachine"/>.
+        /// <see cref="IOwnedState{TState}.AgentOwnerStateMachine"/>.
         /// </summary>
         public static bool IsCurrentState<TState>(this TState state)
             where TState : class, IOwnedState<TState>
-            => state.OwnerStateMachine.CurrentState == state;
+            => state.AgentOwnerStateMachine.CurrentState == state;
 
         /************************************************************************************************************************/
 
@@ -153,7 +153,7 @@ namespace Animancer.FSM
         /// </summary>
         public static bool CanEnterState<TState>(this TState state)
             where TState : class, IOwnedState<TState>
-            => state.OwnerStateMachine.CanSetState(state);
+            => state.AgentOwnerStateMachine.CanSetState(state);
 
         /************************************************************************************************************************/
 
@@ -166,7 +166,7 @@ namespace Animancer.FSM
         /// </summary>
         public static bool TryEnterState<TState>(this TState state)
             where TState : class, IOwnedState<TState>
-            => state.OwnerStateMachine.TrySetState(state);
+            => state.AgentOwnerStateMachine.TrySetState(state);
 
         /************************************************************************************************************************/
 
@@ -178,7 +178,7 @@ namespace Animancer.FSM
         /// </summary>
         public static bool TryReEnterState<TState>(this TState state)
             where TState : class, IOwnedState<TState>
-            => state.OwnerStateMachine.TryResetState(state);
+            => state.AgentOwnerStateMachine.TryResetState(state);
 
         /************************************************************************************************************************/
 
@@ -191,7 +191,7 @@ namespace Animancer.FSM
         /// </summary>
         public static void ForceEnterState<TState>(this TState state)
             where TState : class, IOwnedState<TState>
-            => state.OwnerStateMachine.ForceSetState(state);
+            => state.AgentOwnerStateMachine.ForceSetState(state);
 
         /************************************************************************************************************************/
     }
