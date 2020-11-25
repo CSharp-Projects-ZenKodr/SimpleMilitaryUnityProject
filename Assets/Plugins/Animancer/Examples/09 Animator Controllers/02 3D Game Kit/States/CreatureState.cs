@@ -34,7 +34,7 @@ namespace Animancer.Examples.AnimatorControllers.GameKit
 
         /************************************************************************************************************************/
 
-        public StateMachine<CreatureState> AgentOwnerStateMachine => _Creature.StateMachine;
+        public StateMachine<CreatureState> OwnerStateMachine => _Creature.StateMachine;
 
         /************************************************************************************************************************/
 

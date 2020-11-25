@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\stane\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\stane\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SimpleMilitaryUnityProject.620703417.00" t="ExcludeRecursive" />
-    <e p="C:\Users\stane\Documents\GitHub\SimpleMilitaryUnityProject" t="IncludeRecursive">
+    <e p="C:\Users\uidq0628\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\uidq0628\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SimpleMilitaryUnityProject.193152727.00" t="ExcludeRecursive" />
+    <e p="C:\Users\uidq0628\Documents\GitHub\SimpleMilitaryUnityProject" t="IncludeRecursive">
       <e p="Animancer.csproj" t="IncludeRecursive" />
       <e p="Animancer.Examples.csproj" t="IncludeRecursive" />
       <e p="Animancer.FSM.csproj" t="IncludeRecursive" />
@@ -700,6 +700,27 @@
               </e>
             </e>
           </e>
+          <e p="Sirenix" t="Include">
+            <e p="Odin Inspector" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="Editor" t="Include">
+                  <e p="AssemblyImportSettingsAutomation.cs" t="Include" />
+                  <e p="BuildAOTAutomation.cs" t="Include" />
+                  <e p="EnsureOdinInspectorDefine.cs" t="Include" />
+                  <e p="FixBrokenUnityObjectWrapperDrawer.cs" t="Include" />
+                  <e p="Sirenix.OdinInspector.CompatibilityLayer.Editor.asmdef" t="Include" />
+                  <e p="SyncListDrawer.cs" t="Include" />
+                  <e p="SyncVarAttributeDrawer.cs" t="Include" />
+                  <e p="Vector2IntMinMaxAttributeDrawer.cs" t="Include" />
+                  <e p="VectorIntDrawers.cs" t="Include" />
+                  <e p="VectorIntPropertyResolvers.cs" t="Include" />
+                </e>
+                <e p="SerializedNetworkBehaviour.cs" t="Include" />
+                <e p="Sirenix.OdinInspector.CompatibilityLayer.asmdef" t="Include" />
+                <e p="VectorIntFormatters.cs" t="Include" />
+              </e>
+            </e>
+          </e>
         </e>
         <e p="Scripts" t="Include">
           <e p="CameraHelper" t="Include">
@@ -707,6 +728,7 @@
           </e>
           <e p="Entities" t="Include">
             <e p="Agent.cs" t="Include" />
+            <e p="Enemy.cs" t="Include" />
             <e p="Player" t="Include">
               <e p="Player.cs" t="Include" />
             </e>
@@ -715,6 +737,29 @@
             <e p="AnimationBrain.cs" t="Include" />
             <e p="Combat.cs" t="Include" />
             <e p="Equipment.cs" t="Include" />
+            <e p="Finite State Machines" t="Include">
+              <e p="Helpers" t="Include">
+                <e p="Priority.cs" t="Include" />
+              </e>
+              <e p="StateAction" t="Include">
+                <e p="IStateAction.cs" t="Include" />
+                <e p="StateAction.cs" t="Include" />
+              </e>
+              <e p="States" t="Include">
+                <e p="Generics" t="Include">
+                  <e p="Idle.cs" t="Include" />
+                  <e p="Run.cs" t="Include" />
+                  <e p="Walk.cs" t="Include" />
+                </e>
+                <e p="IOwnerState.cs" t="Include" />
+                <e p="IState.cs" t="Include" />
+                <e p="Player" t="Include">
+                  <e p="PlayerIdle.cs" t="Include" />
+                </e>
+                <e p="State.cs" t="Include" />
+                <e p="StateMachine.cs" t="Include" />
+              </e>
+            </e>
             <e p="InputBrain.cs" t="Include" />
             <e p="Locomotion.cs" t="Include" />
             <e p="Pathing.cs" t="Include" />
@@ -733,12 +778,6 @@
                   <e p="AnimId.cs" t="Include" />
                 </e>
               </e>
-            </e>
-          </e>
-          <e p="Finite State Machines" t="Include">
-            <e p="AgentState.cs" t="Include" />
-            <e p="Helpers" t="Include">
-              <e p="Priority.cs" t="Include" />
             </e>
           </e>
           <e p="Generics" t="Include">
@@ -763,6 +802,7 @@
               <e p="IEquipmentActions.cs" t="Include" />
               <e p="IInventoryActions.cs" t="Include" />
             </e>
+            <e p="IInitialize.cs" t="Include" />
             <e p="Initializations" t="Include">
               <e p="IOnAwake.cs" t="Include" />
               <e p="IOnEnable.cs" t="Include" />
@@ -806,6 +846,8 @@
       <e p="Packages" t="ExcludeRecursive" />
       <e p="PackageToolsEditor.csproj" t="IncludeRecursive" />
       <e p="SimpleMilitaryUnityProject.sln" t="IncludeFlat" />
+      <e p="Sirenix.OdinInspector.CompatibilityLayer.csproj" t="IncludeRecursive" />
+      <e p="Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj" t="IncludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
   </component>

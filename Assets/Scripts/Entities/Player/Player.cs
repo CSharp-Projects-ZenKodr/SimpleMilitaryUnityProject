@@ -1,4 +1,5 @@
 ﻿using Entity_Systems;
+using Entity_Systems.Finite_State_Machines.Helpers;
 using Entity_Systems.SubSystems.Animation.Helpers;
 using Helpers;
 using Interfaces;
@@ -26,6 +27,14 @@ namespace Entities.Player {
 
         #endregion
 
+        #region Properties
+
+        public Combat Combat => _combat;
+        public Equipment Equipment => _equipment;
+        public InputBrain InputBrain => _inputBrain;
+        
+        #endregion
+        
         #region Protected Overrided Methods - Initializations
 
         protected override void Awake() {
@@ -83,17 +92,6 @@ namespace Entities.Player {
             
             transform.position += _animationBrain.QueryController.QueryAnimatorDeltaPosition();
         }
-
-        // /// <summary>
-        // /// See <see cref="AnimationBrain"/>
-        // /// </summary>
-        // protected override void Update() {
-        //     base.Update();
-        //     var speed = _locomotion.GetCurrentSpeed();
-        //     
-        //     _animationBrain.LocomotionController.UpdateLocomotionAnimation(speed, _container, _animationBrain);
-        //
-        // }
         
         #endregion
         
@@ -104,7 +102,7 @@ namespace Entities.Player {
         /// Logic for when the 'left-mouse' button is pressed
         /// </summary>
         /// <param name="context"></param>
-        private void InteractWithPrimaryClick(InputAction.CallbackContext context) {
+        internal void InteractWithPrimaryClick(InputAction.CallbackContext context) {
             var raycastHit = _raycasting.GetRaycastOnClick();
             
             if (raycastHit == null) return;
@@ -118,29 +116,29 @@ namespace Entities.Player {
         /// <summary>
         /// Logic for when the 'run' button is pressed
         /// </summary>
-        private void InteractWithRun(InputAction.CallbackContext context) {
+        internal void InteractWithRun(InputAction.CallbackContext context) {
             _locomotion.Speed = 4.0f;
             _locomotion.IsRunning = !_locomotion.IsRunning;
-            _animationBrain.Animate(AnimId.Run, 0.1f);
+            _stateMachine.CurrentState = _stateMachine.GetState(Priority.Run);
         }
 
         /// <summary>
         /// Logic for when the player reaches their target destination, A* Pathfinding
         /// </summary>
-        private void InteractWithOnDestinationReached() {
+        internal void InteractWithOnDestinationReached() {
             _locomotion.Speed = 0.0f;
             _locomotion. CanSearch = false;
             _locomotion.IsRunning = false;
-            _animationBrain.Animate(AnimId.Idle);
+            _stateMachine.CurrentState = _stateMachine.GetState(Priority.Idle);
         }
         
         /// <summary>
         /// Logic for when the 'crouch' button is pressed
         /// </summary>
         /// <param name="context"></param>
-        private void InteractWithCrouch(InputAction.CallbackContext context) { }
+        internal void InteractWithCrouch(InputAction.CallbackContext context) { }
 
-        private void InteractWithInventoryOne(InputAction.CallbackContext context) {
+        internal void InteractWithInventoryOne(InputAction.CallbackContext context) {
             _equipment.EquipProjectileWeapon(
                 _skeleton.GetJointTransform(Joints.RightHand),
                 ProjectileWeapon);
@@ -157,12 +155,12 @@ namespace Entities.Player {
         /// <param name="castedRaycast"></param>
         private void HandleRaycastingTerrain(RaycastHit castedRaycast) {
             if (_locomotion.IsRunning) {
+                _stateMachine.CurrentState = _stateMachine.GetState(Priority.Run);
                 _locomotion.Speed = 4.0f;
-                _animationBrain.Animate(AnimId.Run);
             }
             else {
+                _stateMachine.CurrentState = _stateMachine.GetState(Priority.Walk);
                 _locomotion.Speed = 2.0f;
-                _animationBrain.Animate(AnimId.Walk);
             }
 
             _locomotion.CanSearch = true;

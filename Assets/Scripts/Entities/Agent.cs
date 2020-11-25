@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Animancer;
-using Animancer.FSM;
 using Entity_Systems;
+using Entity_Systems.Finite_State_Machines;
+using Entity_Systems.Finite_State_Machines.Helpers;
 using Entity_Systems.SubSystems.Animation.AnimationDataContainers;
-using Finite_State_Machines;
 using Pathfinding;
 using UnityEngine;
 
@@ -27,27 +26,22 @@ namespace Entities {
         protected Locomotion _locomotion;    // Controls speed, direction, location, locomotion, etc.
         protected Skeleton _skeleton;    // Provides access to the join system of the agent's prefab model
         protected AnimationBrain _animationBrain;
+        protected StateMachine<State> _stateMachine;
 
         #endregion
-
+        
         #region SerializeFields & Properties - Animation Related
         
         [SerializeField] protected AnimDataContainer _container = null;
+        [SerializeField] protected List<State> _states;
+
+        public Raycasting Raycasting => _raycasting;
+        public Pathing Pathing => _pathing;
+        public Locomotion Locomotion => _locomotion;
+        public Skeleton Skeleton => _skeleton;
         public AnimDataContainer Container => _container;
+        public AnimationBrain AnimationBrain => _animationBrain;
         
-        #endregion
-
-        #region SerializedFields - State Machine
-
-        [SerializeField] private List<AgentState> _agentStates;
-        public StateMachine<AgentState> StateMachine { get; private set; }
-
-        #endregion
-
-        #region Delegate Definitions
-
-        private Action _forceEnterIdleState;    // Every Agent base animation state should start out in 'Idle'
-
         #endregion
         
         #region Protected Virtual Methods
@@ -64,26 +58,32 @@ namespace Entities {
             _locomotion = new Locomotion(tr, GetComponent<AIPath>());
             _skeleton = new Skeleton(gameObject);
             _animationBrain = new AnimationBrain(GetComponent<AnimancerComponent>(), _container, GetComponent<Animator>());
-            
-            StateMachine = new StateMachine<AgentState>();
-            StateMachine.ForceSetState(_agentStates[0]);            
+            _stateMachine = new StateMachine<State>(this, _states);
         }
 
         /// <summary>
         /// Called after Awake. Should put the agent in a valid state; i.e. 'enable' any dependecies
         /// </summary>
         protected virtual void OnEnable() {
+           _stateMachine.ForceNextState(Priority.Idle);
         }
 
         /// <summary>
         /// Exact opposite of OnEnable()
         /// </summary>
         protected virtual void OnDisable() {
-            
         }
 
         #endregion
 
+        #region Update Loop
+
+        protected virtual void Update() {
+            _stateMachine.InvokeStateTick();
+        }
+
+        #endregion
+        
         #region Protected Abstract Methods
 
         

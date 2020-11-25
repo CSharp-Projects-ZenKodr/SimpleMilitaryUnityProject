@@ -100,7 +100,7 @@ namespace Animancer.FSM
         {
 #if UNITY_EDITOR
             var owned = state as IOwnedState<TState>;
-            if (owned != null && owned.AgentOwnerStateMachine != this)
+            if (owned != null && owned.OwnerStateMachine != this)
             {
                 throw new InvalidOperationException(
                     "You are attempting to use a state in a machine that is not its owner." +
