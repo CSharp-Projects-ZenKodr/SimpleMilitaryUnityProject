@@ -15,7 +15,7 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
     ""name"": ""input_actions_player_prototype"",
     ""maps"": [
         {
-            ""name"": ""Player"",
+            ""name"": ""Human"",
             ""id"": ""77c1806c-cd8c-406e-bf8e-911862767461"",
             ""actions"": [
                 {
@@ -867,8 +867,8 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
         }
     ]
 }");
-        // Player
-        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        // Human
+        m_Player = asset.FindActionMap("Human", throwIfNotFound: true);
         m_Player_PrimaryClick = m_Player.FindAction("PrimaryClick", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         // UI
@@ -940,7 +940,7 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
         asset.Disable();
     }
 
-    // Player
+    // Human
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_PrimaryClick;

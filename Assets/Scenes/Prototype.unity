@@ -1818,11 +1818,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 11400000, guid: 414a438c833562b48a5b74c9df13101e, type: 2}
-  _states:
-  - {fileID: 11400000, guid: cd55bbc1c589656418c68b72c65f763b, type: 2}
-  - {fileID: 11400000, guid: 82ba239d0de2cc7448c93afb33c9e5df, type: 2}
-  - {fileID: 11400000, guid: c2c50deab856b004dab6be4ec578affd, type: 2}
   ProjectileWeapon: {fileID: 11400000, guid: a55292883e4f9b045b4a4357bedc8f85, type: 2}
+  _states:
+  - {fileID: 11400000, guid: 14e7a2c0cd51bdc4aa1850e6caa7121f, type: 2}
+  - {fileID: 11400000, guid: ce5af05e1aa796e4d850867d95905443, type: 2}
+  - {fileID: 11400000, guid: 3205040eb56190b44ab24d49602c30b5, type: 2}
 --- !u!4 &1873010392 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2980961468618403306, guid: e8549b409d7ac2f4dab5818b9d5c309c, type: 3}

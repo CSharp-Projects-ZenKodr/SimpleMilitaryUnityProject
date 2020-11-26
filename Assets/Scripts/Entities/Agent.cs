@@ -3,8 +3,10 @@ using Animancer;
 using Entity_Systems;
 using Entity_Systems.Finite_State_Machines;
 using Entity_Systems.Finite_State_Machines.Helpers;
+using Entity_Systems.Finite_State_Machines.States;
 using Entity_Systems.SubSystems.Animation.AnimationDataContainers;
 using Pathfinding;
+using Sirenix.Serialization;
 using UnityEngine;
 
 namespace Entities {
@@ -26,14 +28,12 @@ namespace Entities {
         protected Locomotion _locomotion;    // Controls speed, direction, location, locomotion, etc.
         protected Skeleton _skeleton;    // Provides access to the join system of the agent's prefab model
         protected AnimationBrain _animationBrain;
-        protected StateMachine<State> _stateMachine;
 
         #endregion
         
         #region SerializeFields & Properties - Animation Related
         
         [SerializeField] protected AnimDataContainer _container = null;
-        [SerializeField] protected List<State> _states;
 
         public Raycasting Raycasting => _raycasting;
         public Pathing Pathing => _pathing;
@@ -58,34 +58,21 @@ namespace Entities {
             _locomotion = new Locomotion(tr, GetComponent<AIPath>());
             _skeleton = new Skeleton(gameObject);
             _animationBrain = new AnimationBrain(GetComponent<AnimancerComponent>(), _container, GetComponent<Animator>());
-            _stateMachine = new StateMachine<State>(this, _states);
         }
 
         /// <summary>
         /// Called after Awake. Should put the agent in a valid state; i.e. 'enable' any dependecies
         /// </summary>
-        protected virtual void OnEnable() {
-           _stateMachine.ForceNextState(Priority.Idle);
-        }
+        protected virtual void OnEnable() { }
 
         /// <summary>
         /// Exact opposite of OnEnable()
         /// </summary>
-        protected virtual void OnDisable() {
-        }
-
-        #endregion
-
-        #region Update Loop
-
-        protected virtual void Update() {
-            _stateMachine.InvokeStateTick();
-        }
+        protected virtual void OnDisable() { }
 
         #endregion
         
         #region Protected Abstract Methods
-
         
         /// <summary>
         /// Handles population of any dependencies that are specific to that agent

@@ -40,8 +40,8 @@ namespace Bizniz
         //
 #if BIZNIZ_REWIRED
         protected int RewiredPlayerId = 0;
-        protected Rewired.Player m_Rewiredplayer = null;
-        public Rewired.Player Rewiredplayer
+        protected Rewired.Human m_Rewiredplayer = null;
+        public Rewired.Human Rewiredplayer
         {
             get
             {

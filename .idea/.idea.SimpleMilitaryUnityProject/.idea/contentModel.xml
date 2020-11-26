@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\uidq0628\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\uidq0628\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SimpleMilitaryUnityProject.193152727.00" t="ExcludeRecursive" />
-    <e p="C:\Users\uidq0628\Documents\GitHub\SimpleMilitaryUnityProject" t="IncludeRecursive">
+    <e p="C:\Users\stane\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\stane\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SimpleMilitaryUnityProject.620703417.00" t="ExcludeRecursive" />
+    <e p="C:\Users\stane\Documents\GitHub\SimpleMilitaryUnityProject" t="IncludeRecursive">
       <e p="Animancer.csproj" t="IncludeRecursive" />
       <e p="Animancer.Examples.csproj" t="IncludeRecursive" />
       <e p="Animancer.FSM.csproj" t="IncludeRecursive" />
@@ -729,8 +729,8 @@
           <e p="Entities" t="Include">
             <e p="Agent.cs" t="Include" />
             <e p="Enemy.cs" t="Include" />
-            <e p="Player" t="Include">
-              <e p="Player.cs" t="Include" />
+            <e p="Human" t="Include">
+              <e p="Human.cs" t="Include" />
             </e>
           </e>
           <e p="Entity Systems" t="Include">
@@ -741,23 +741,35 @@
               <e p="Helpers" t="Include">
                 <e p="Priority.cs" t="Include" />
               </e>
+              <e p="Machine" t="Include">
+                <e p="HumanStateMachine.cs" t="Include" />
+                <e p="StateMachine.cs" t="Include" />
+              </e>
               <e p="StateAction" t="Include">
                 <e p="IStateAction.cs" t="Include" />
+                <e p="Player" t="Include">
+                  <e p="Idle" t="Include">
+                    <e p="Test.cs" t="Include" />
+                  </e>
+                </e>
                 <e p="StateAction.cs" t="Include" />
+                <e p="Wrappers" t="Include">
+                  <e p="StateActionWrapperEnemy.cs" t="Include" />
+                  <e p="StateActionWrapperHuman.cs" t="Include" />
+                </e>
               </e>
               <e p="States" t="Include">
-                <e p="Generics" t="Include">
-                  <e p="Idle.cs" t="Include" />
-                  <e p="Run.cs" t="Include" />
-                  <e p="Walk.cs" t="Include" />
-                </e>
-                <e p="IOwnerState.cs" t="Include" />
                 <e p="IState.cs" t="Include" />
-                <e p="Player" t="Include">
-                  <e p="PlayerIdle.cs" t="Include" />
+                <e p="PlayerStates" t="Include">
+                  <e p="HumanIdle.cs" t="Include" />
+                  <e p="HumanRun.cs" t="Include" />
+                  <e p="HumanWalk.cs" t="Include" />
                 </e>
                 <e p="State.cs" t="Include" />
-                <e p="StateMachine.cs" t="Include" />
+                <e p="Wrappers" t="Include">
+                  <e p="StateWrapperEnemy.cs" t="Include" />
+                  <e p="StateWrapperHuman.cs" t="Include" />
+                </e>
               </e>
             </e>
             <e p="InputBrain.cs" t="Include" />
@@ -808,6 +820,10 @@
               <e p="IOnEnable.cs" t="Include" />
               <e p="IOnStart.cs" t="Include" />
               <e p="ISubscribeToSubSystemEvents.cs" t="Include" />
+            </e>
+            <e p="States" t="Include">
+              <e p="IStateActionWrapper.cs" t="Include" />
+              <e p="IStateWrapper.cs" t="Include" />
             </e>
             <e p="Weapons" t="Include">
               <e p="IAbility.cs" t="Include" />

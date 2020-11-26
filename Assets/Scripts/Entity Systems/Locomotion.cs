@@ -70,7 +70,7 @@ namespace Entity_Systems {
         }
 
         /// <summary>
-        /// Register methods to the onTargetReached Action
+        /// Register methods to the onTargetReached StateAction
         /// </summary>
         /// <param name="delegate">Subscribing method</param>
         public void RegisterDelegateToAiOnPathComplete(AIPath.OnTargetReachedDelegate @delegate) {
