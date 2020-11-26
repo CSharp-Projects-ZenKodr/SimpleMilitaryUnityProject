@@ -11,7 +11,7 @@
                     "id": "7cb2eb00-a0e4-4c49-b2c9-42c9ad21b7eb",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "Crouch",

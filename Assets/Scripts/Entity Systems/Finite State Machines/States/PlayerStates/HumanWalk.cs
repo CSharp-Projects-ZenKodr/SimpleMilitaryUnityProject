@@ -12,8 +12,8 @@ namespace Entity_Systems.Finite_State_Machines.States.PlayerStates {
             SetLocomotion(agent.Locomotion);
             agent.AnimationBrain.Animate(AnimId.Walk);
         }
-        
-        public override bool CanExitState(Human nextState) {
+
+        public override bool CanExitState(State<Human> nextState) {
             return base.CanExitState(nextState);
         }
 

@@ -23,13 +23,19 @@ namespace Entities.Human {
 
         #endregion
         
-        #region Private Fields & Properties
+        #region Private Fields - System Related
 
         private Combat _combat;
         private Equipment _equipment;
         private InputBrain _inputBrain;
         private HumanStateMachine _machine;
         [SerializeField] private List<StateWrapperHuman> _states;
+
+        #endregion
+
+        #region Private Fields - Human Related
+
+        private bool _isLMBTrigger = false;
 
         #endregion
 
@@ -83,8 +89,16 @@ namespace Entities.Human {
         #region Update Loop
 
         private void Update() {
-            if (Machine.CurrentState.IsTickable) Machine.InvokeStateTick(this);
-                
+            if (Machine.CurrentState.IsTickable) {
+                Machine.InvokeStateTick(this);
+            }
+
+        }
+
+        private void FixedUpdate() {
+            if (_isLMBTrigger) {
+                HandlePrimaryClickInputHeld();
+            }
         }
 
         #endregion
@@ -122,14 +136,8 @@ namespace Entities.Human {
         /// </summary>
         /// <param name="context"></param>
         internal void InteractWithPrimaryClick(InputAction.CallbackContext context) {
-            var raycastHit = _raycasting.GetRaycastOnClick();
-            
-            if (raycastHit == null) return;
-            var castedRaycast = (RaycastHit) raycastHit;
-            
-            if (castedRaycast.collider.CompareTag(TagHelper.TerrainTag)) {
-                HandleRaycastingTerrain(castedRaycast);
-            }
+            _isLMBTrigger = !_isLMBTrigger;
+            Debug.Log(context.performed);
         }
 
         /// <summary>
@@ -179,6 +187,18 @@ namespace Entities.Human {
             _locomotion.SetDestinationAndSearchPathNonNormalized(_pathing.GetNodeDestination(castedRaycast.point));
         }
 
+        private void HandlePrimaryClickInputHeld() {
+            var raycastHit = _raycasting.GetRaycastOnClick();
+            
+            if (raycastHit == null) return;
+            var castedRaycast = (RaycastHit) raycastHit;
+            
+            if (castedRaycast.collider.CompareTag(TagHelper.TerrainTag)) {
+                HandleRaycastingTerrain(castedRaycast);
+            }
+        }
+        
         #endregion
+
     }
 }

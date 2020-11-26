@@ -7,16 +7,12 @@ namespace Entity_Systems.Finite_State_Machines.States.PlayerStates {
     [CreateAssetMenu(fileName = "HumanIdle", menuName = "Create State/Human/Idle")]
     public class HumanIdle : StateWrapperHuman {
         #region Public Overridden Methods
-        
+
         public override void OnEnterState(Human agent) {
             base.OnEnterState(agent);
 
             agent.AnimationBrain.Animate(AnimId.Idle);
             ResetLocomotion(agent.Locomotion);
-        }
-
-        public override void Tick(Human agent) {
-            base.Tick(agent);
         }
 
         #endregion

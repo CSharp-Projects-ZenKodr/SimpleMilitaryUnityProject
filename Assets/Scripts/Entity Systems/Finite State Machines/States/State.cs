@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using Entities;
 using Entity_Systems.Finite_State_Machines.Helpers;
-using Entity_Systems.Finite_State_Machines.StateAction;
 using UnityEngine;
 
 namespace Entity_Systems.Finite_State_Machines.States {
@@ -14,17 +12,15 @@ namespace Entity_Systems.Finite_State_Machines.States {
         [SerializeField] protected bool _isTickable = false;
         public bool IsTickable => _isTickable;
 
-        public virtual List<StateAction<T>> ActionList { get; }
+        /// <summary>
+        /// Always returns true unless overridden.
+        /// </summary>
+        public virtual bool CanEnterState(State<T> previousState) => true;
 
         /// <summary>
         /// Always returns true unless overridden.
         /// </summary>
-        public virtual bool CanEnterState(T previousState) => true;
-
-        /// <summary>
-        /// Always returns true unless overridden.
-        /// </summary>
-        public virtual bool CanExitState(T nextState) => true;
+        public virtual bool CanExitState(State<T> nextState) => true;
 
         /// <summary>
         /// Can be overridden to define logic for when the state is entered
@@ -45,14 +41,7 @@ namespace Entity_Systems.Finite_State_Machines.States {
         /// <summary>
         /// Core method of a state; logic for processing and implementing the state goes through this method
         /// </summary>
-        /// <param name="agent"></param>
-        public virtual void Tick(T agent) {
-            Debug.Log("Action List Count: " + ActionList.Count);
-            if (ActionList == null) return;
-            Debug.Log("Actionlist has been queried.");
-            foreach (var action in ActionList) {
-                action.Act(agent);
-            }
-        }
+        /// <param name="agent">Agent to query statemachine</param>
+        public virtual void Tick(T agent) { }
     }
 }

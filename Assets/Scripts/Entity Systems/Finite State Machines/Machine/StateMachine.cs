@@ -21,14 +21,23 @@ namespace Entity_Systems.Finite_State_Machines.Machine {
         public virtual State<T> CurrentState {
             get => _currentState;
             set {
+                if (_currentState == null) {
+                    _currentState = value;
+                    _currentState.OnEnterState(_agent);
+                }
+                
                 if (value == _currentState) {
                     return;
                 }
 
-                if (_currentState != null) _currentState.OnExitState(_agent);
-
-                _currentState = value;
-                _currentState.OnEnterState(_agent);
+                if (_currentState.CanExitState(value) && _currentState != null) {
+                    _currentState.OnExitState(_agent);
+                    _currentState = value;
+                    _currentState.OnEnterState(_agent);
+                }
+                else {
+                    Debug.Log($"{value.name} was already set to the current state.");
+                }
             }
         }
 

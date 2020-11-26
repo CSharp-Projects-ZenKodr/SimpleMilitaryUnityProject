@@ -15,7 +15,7 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
     ""name"": ""input_actions_player_prototype"",
     ""maps"": [
         {
-            ""name"": ""Human"",
+            ""name"": ""Player"",
             ""id"": ""77c1806c-cd8c-406e-bf8e-911862767461"",
             ""actions"": [
                 {
@@ -24,7 +24,7 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
                     ""id"": ""7cb2eb00-a0e4-4c49-b2c9-42c9ad21b7eb"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press(behavior=2)""
                 },
                 {
                     ""name"": ""Crouch"",
@@ -867,8 +867,8 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
         }
     ]
 }");
-        // Human
-        m_Player = asset.FindActionMap("Human", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_PrimaryClick = m_Player.FindAction("PrimaryClick", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         // UI
@@ -940,7 +940,7 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
         asset.Disable();
     }
 
-    // Human
+    // Player
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_PrimaryClick;
@@ -949,10 +949,7 @@ public class @PlayerInputControlsRevised : IInputActionCollection, IDisposable
     {
         private @PlayerInputControlsRevised m_Wrapper;
         public PlayerActions(@PlayerInputControlsRevised wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PrimaryClick {
-            get => m_Wrapper.m_Player_PrimaryClick;
-        }
-
+        public InputAction @PrimaryClick => m_Wrapper.m_Player_PrimaryClick;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
