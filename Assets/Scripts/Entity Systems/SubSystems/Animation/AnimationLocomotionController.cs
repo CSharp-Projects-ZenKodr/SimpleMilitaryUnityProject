@@ -35,7 +35,7 @@ namespace Entity_Systems.SubSystems.Animation {
         // /// <param name="brain">The animation brain - used to called Animate method</param>
         // public void UpdateLocomotionAnimation(float relativeSpeed, AnimDataContainer container, AnimationBrain brain) {
         //     if (relativeSpeed <= 0.001f) {
-        //         brain.Animate(AnimId.Idle);
+        //         brain.Animate(AnimationId.Idle);
         //
         //         return;
         //     }
@@ -43,16 +43,16 @@ namespace Entity_Systems.SubSystems.Animation {
         //     ClipState.Transition outAnim = null, playAnim = null;
         //
         //     if (relativeSpeed > 0.001f && relativeSpeed <= 2.0f) {
-        //         playAnim = brain.QueryController.QueryDataContainer(AnimId.Walk, container);
-        //         //outAnim = _brain.QueryDataContainer(AnimId.Run);
+        //         playAnim = brain.QueryController.QueryDataContainer(AnimationId.Walk, container);
+        //         //outAnim = _brain.QueryDataContainer(AnimationId.Run);
         //     }
         //     
         //     else if (relativeSpeed > 3.0f) {
-        //         playAnim = brain.QueryController.QueryDataContainer(AnimId.Run, container);
-        //         //outAnim = _brain.QueryDataContainer(AnimId.Walk);
+        //         playAnim = brain.QueryController.QueryDataContainer(AnimationId.Run, container);
+        //         //outAnim = _brain.QueryDataContainer(AnimationId.Walk);
         //     }
         //
-        //     //else outAnim = playAnim = _container.Query(AnimId.Walk);
+        //     //else outAnim = playAnim = _animDataContainer.Query(AnimationId.Walk);
         //
         //     brain.Animate(out var playState, playAnim);
         //    // _brain.AnimancerTryGet(out var outState, playState, playAnim, outAnim);
@@ -70,7 +70,7 @@ namespace Entity_Systems.SubSystems.Animation {
         /// </summary>
         public void StartIdleSequence(AnimDataContainer container, AnimationBrain brain) {
             ResetIdleCr();
-            brain.Animate(AnimId.Idle);
+            brain.Animate(AnimationId.Idle);
 
             _idleSequenceCoroutine = brain.Animancer.StartCoroutine(StartIdleAnimationSequenceCr(container, brain));
         }

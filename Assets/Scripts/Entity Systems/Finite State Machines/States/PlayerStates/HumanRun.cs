@@ -10,7 +10,7 @@ namespace Entity_Systems.Finite_State_Machines.States.PlayerStates {
             base.OnEnterState(agent);
             
             SetLocomotion(agent.Locomotion);
-            agent.AnimationBrain.Animate(AnimId.Run);
+            agent.AnimationBrain.Animate(AnimationId.Run);
         }
 
         public override void OnExitState(Human agent) {

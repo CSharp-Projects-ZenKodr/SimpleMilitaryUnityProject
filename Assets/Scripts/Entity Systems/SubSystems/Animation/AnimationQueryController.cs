@@ -37,7 +37,8 @@ namespace Entity_Systems.SubSystems.Animation {
         /// <param name="index">List index value to return</param>
         /// <returns></returns>
         public ClipState.Transition QueryDataContainerIdleList(int index) {
-            return _container.IdleSequence[index]; 
+            //return _container.IdleSequence[index]; 
+            return null;
         }
 
         /// <summary>
@@ -45,7 +46,8 @@ namespace Entity_Systems.SubSystems.Animation {
         /// </summary>
         /// <returns></returns>
         public int QueryDataContainerIdleListCount() {
-            return _container.IdleSequence.Count;
+            //return _container.IdleSequence.Count;
+            return 0;
         }
 
         /// <summary>

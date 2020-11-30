@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\uidq0628\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\uidq0628\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SimpleMilitaryUnityProject.193152727.00" t="ExcludeRecursive" />
-    <e p="C:\Users\uidq0628\Documents\GitHub\SimpleMilitaryUnityProject" t="IncludeRecursive">
+    <e p="C:\Users\stane\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\stane\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SimpleMilitaryUnityProject.620703417.00" t="ExcludeRecursive" />
+    <e p="C:\Users\stane\Documents\GitHub\SimpleMilitaryUnityProject" t="IncludeRecursive">
       <e p="Animancer.csproj" t="IncludeRecursive" />
       <e p="Animancer.Examples.csproj" t="IncludeRecursive" />
       <e p="Animancer.FSM.csproj" t="IncludeRecursive" />
@@ -327,6 +327,170 @@
               <e p="CameraProfile.cs" t="Include" />
             </e>
           </e>
+        </e>
+        <e p="DestroyIt" t="Include">
+          <e p="Demos (safe to delete)" t="Include">
+            <e p="Fonts" t="Include">
+              <e p="LICENSE (for Open Sans font).txt" t="Include" />
+            </e>
+            <e p="MainScenariosSceneObjectPool.txt" t="Include" />
+            <e p="Scripts" t="Include">
+              <e p="Behaviors" t="Include">
+                <e p="BulbFlash.cs" t="Include" />
+                <e p="DemoNavigation.cs" t="Include" />
+                <e p="DestructibleTrees.cs" t="Include" />
+                <e p="DisableAfter.cs" t="Include" />
+                <e p="DynamicDestructible.cs" t="Include" />
+                <e p="FadeOut.cs" t="Include" />
+                <e p="Follow.cs" t="Include" />
+                <e p="HeadsUpDisplay.cs" t="Include" />
+                <e p="MeleeArea.cs" t="Include" />
+                <e p="OpenCloseChest.cs" t="Include" />
+                <e p="PoweredLight.cs" t="Include" />
+                <e p="PoweredTag.cs" t="Include" />
+                <e p="PowerSource.cs" t="Include" />
+                <e p="RocketLoading.cs" t="Include" />
+                <e p="TurnOnCamera.cs" t="Include" />
+              </e>
+              <e p="Editor" t="Include">
+                <e p="ColorCorrectionCurvesEditor.cs" t="Include" />
+                <e p="FollowEditor.cs" t="Include" />
+                <e p="SetupDestroyItDemo.cs" t="Include" />
+                <e p="TonemappingEditor.cs" t="Include" />
+              </e>
+              <e p="Effects" t="Include">
+                <e p="ColorCorrectionCurves.cs" t="Include" />
+                <e p="DustWall.cs" t="Include" />
+                <e p="Explode.cs" t="Include" />
+                <e p="FadeIn.cs" t="Include" />
+                <e p="FadeParticleEffect.cs" t="Include" />
+                <e p="FlareFadeOut.cs" t="Include" />
+                <e p="FloatUp.cs" t="Include" />
+                <e p="NukeCameraEffect.cs" t="Include" />
+                <e p="PostEffectsBase.cs" t="Include" />
+                <e p="ResetSkybox.cs" t="Include" />
+                <e p="ScreenSpaceAmbientOcclusion.cs" t="Include" />
+                <e p="ShockWall.cs" t="Include" />
+                <e p="SmoothMouseLook.cs" t="Include" />
+                <e p="Tonemapping.cs" t="Include" />
+              </e>
+              <e p="FirstPersonController" t="Include">
+                <e p="CrossPlatformInputManager.cs" t="Include" />
+                <e p="FirstPersonController.cs" t="Include" />
+                <e p="MobileInput.cs" t="Include" />
+                <e p="MouseLook.cs" t="Include" />
+                <e p="StandaloneInput.cs" t="Include" />
+                <e p="VirtualInput.cs" t="Include" />
+              </e>
+              <e p="Gizmos" t="Include">
+                <e p="DrawLine.cs" t="Include" />
+                <e p="EditorGizmos.cs" t="Include" />
+              </e>
+              <e p="Helpers" t="Include">
+                <e p="WeaponHelper.cs" t="Include" />
+              </e>
+              <e p="Managers" t="Include">
+                <e p="InputManager.cs" t="Include" />
+              </e>
+              <e p="Weapons" t="Include">
+                <e p="Bullet.cs" t="Include" />
+                <e p="RigidbodyProjectile.cs" t="Include" />
+                <e p="Rocket.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="ColorCorrectionCurves.shader" t="Include" />
+              <e p="ColorCorrectionCurvesSimple.shader" t="Include" />
+              <e p="ColorCorrectionSelective.shader" t="Include" />
+              <e p="DestroyIt Mobile.shader" t="Include" />
+              <e p="DestroyItSpeedTree.shader" t="Include" />
+              <e p="DestroyItSpeedTreeCommon.cginc" t="Include" />
+              <e p="DestroyItSpeedTreeVertex.cginc" t="Include" />
+              <e p="DestroyItSpeedTreeWind.cginc" t="Include" />
+              <e p="frag_ao.cginc" t="Include" />
+              <e p="Particle Alpha Blend (No Fog).shader" t="Include" />
+              <e p="Skybox-Procedural.shader" t="Include" />
+              <e p="SSAOShader.shader" t="Include" />
+              <e p="SurfaceShader_VC.shader" t="Include" />
+              <e p="Tonemapper.shader" t="Include" />
+            </e>
+          </e>
+          <e p="Extras (safe to delete)" t="Include">
+            <e p="PlayMaker" t="Include">
+              <e p="ReadMe (important).txt" t="Include" />
+            </e>
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="Behaviors" t="Include">
+              <e p="ActivateDestructibles.cs" t="Include" />
+              <e p="AutoDamage.cs" t="Include" />
+              <e p="ChainDestruction.cs" t="Include" />
+              <e p="ChainDestructionTrigger.cs" t="Include" />
+              <e p="ChipAwayDebris.cs" t="Include" />
+              <e p="ClingPoint.cs" t="Include" />
+              <e p="DelayedRigidbody.cs" t="Include" />
+              <e p="DestroyAfter.cs" t="Include" />
+              <e p="Destructible.cs" t="Include" />
+              <e p="DestructibleParent.cs" t="Include" />
+              <e p="DestructionTest.cs" t="Include" />
+              <e p="EnableColliderAfter.cs" t="Include" />
+              <e p="EnableGravityAfter.cs" t="Include" />
+              <e p="ExplodeAfter.cs" t="Include" />
+              <e p="FlashingLight.cs" t="Include" />
+              <e p="HitEffects.cs" t="Include" />
+              <e p="PoolAfter.cs" t="Include" />
+              <e p="ReleaseObject.cs" t="Include" />
+              <e p="SpawnObject.cs" t="Include" />
+              <e p="SupportPoint.cs" t="Include" />
+              <e p="TagAfter.cs" t="Include" />
+              <e p="TagIt.cs" t="Include" />
+              <e p="TerrainPreserver.cs" t="Include" />
+              <e p="WhenDamaged.cs" t="Include" />
+              <e p="WhenDamagedDamageParents.cs" t="Include" />
+              <e p="WhenDestroyed.cs" t="Include" />
+              <e p="WhenDestroyedPlaySound.cs" t="Include" />
+              <e p="WhenDestroyedResetTree.cs" t="Include" />
+              <e p="WhenRepaired.cs" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="CreateLayers.cs" t="Include" />
+              <e p="DestructibleEditor.cs" t="Include" />
+              <e p="DestructionManagerEditor.cs" t="Include" />
+              <e p="HitEffectsEditor.cs" t="Include" />
+              <e p="ObjectPoolEditor.cs" t="Include" />
+              <e p="SetupDestroyIt.cs" t="Include" />
+              <e p="TagItEditor.cs" t="Include" />
+              <e p="TreeManagerEditor.cs" t="Include" />
+            </e>
+            <e p="Extensions" t="Include">
+              <e p="ArrayExtensions.cs" t="Include" />
+              <e p="DestructibleExtensions.cs" t="Include" />
+              <e p="GameObjectExtensions.cs" t="Include" />
+              <e p="GizmoExtensions.cs" t="Include" />
+              <e p="StringExtensions.cs" t="Include" />
+              <e p="TagItExtensions.cs" t="Include" />
+              <e p="TerrainExtensions.cs" t="Include" />
+              <e p="Vector3Extensions.cs" t="Include" />
+            </e>
+            <e p="Framework" t="Include">
+              <e p="Enums.cs" t="Include" />
+              <e p="HitEffect.cs" t="Include" />
+              <e p="Interfaces.cs" t="Include" />
+              <e p="ObjectModels.cs" t="Include" />
+            </e>
+            <e p="Helpers" t="Include">
+              <e p="Check.cs" t="Include" />
+              <e p="DestructibleHelper.cs" t="Include" />
+              <e p="ExplosionHelper.cs" t="Include" />
+            </e>
+            <e p="Managers" t="Include">
+              <e p="DestructionManager.cs" t="Include" />
+              <e p="ObjectPool.cs" t="Include" />
+              <e p="ParticleManager.cs" t="Include" />
+              <e p="TreeManager.cs" t="Include" />
+            </e>
+          </e>
+          <e p="v1.12 Changelog.txt" t="Include" />
         </e>
         <e p="Input System" t="Include">
           <e p="PlayerInputControlsRevised.cs" t="Include" />
@@ -735,6 +899,7 @@
           </e>
           <e p="Entity Systems" t="Include">
             <e p="AnimationBrain.cs" t="Include" />
+            <e p="AudioBrain.cs" t="Include" />
             <e p="Combat.cs" t="Include" />
             <e p="Equipment.cs" t="Include" />
             <e p="Finite State Machines" t="Include">
@@ -780,10 +945,24 @@
                 <e p="AnimationLocomotionController.cs" t="Include" />
                 <e p="AnimationQueryController.cs" t="Include" />
                 <e p="Helpers" t="Include">
+                  <e p="AnimationEventStatics.cs" t="Include" />
+                  <e p="AnimationId.cs" t="Include" />
                   <e p="AnimationParameterStatics.cs" t="Include" />
                   <e p="AnimationWeaponTypes.cs" t="Include" />
-                  <e p="AnimId.cs" t="Include" />
                 </e>
+              </e>
+              <e p="Audio" t="Include">
+                <e p="Brains" t="Include">
+                  <e p="HumanAudioBrain.cs" t="Include" />
+                </e>
+                <e p="Data Containers" t="Include">
+                  <e p="HumanAudioDataContainer.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Data Containers" t="Include">
+                <e p="DataContainer.cs" t="Include" />
+                <e p="DataContainerAnimationsWrapper.cs" t="Include" />
+                <e p="DataContainerAudioWrapper.cs" t="Include" />
               </e>
             </e>
           </e>
@@ -839,7 +1018,7 @@
             </e>
           </e>
           <e p="Managers" t="Include">
-            <e p="Manager.cs" t="Include" />
+            <e p="AudioManager.cs" t="Include" />
           </e>
         </e>
         <e p="SimpleMilitary" t="Include">

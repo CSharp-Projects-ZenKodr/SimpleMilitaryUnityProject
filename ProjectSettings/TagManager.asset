@@ -9,6 +9,7 @@ TagManager:
   - Agent Model
   - RightHand
   - LeftHand
+  - ClingPoint
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - 
   - Walkable Terrain
-  - 
+  - DestroyItDebris
   - 
   - 
   - 

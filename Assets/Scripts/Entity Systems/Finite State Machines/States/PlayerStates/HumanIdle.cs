@@ -11,7 +11,7 @@ namespace Entity_Systems.Finite_State_Machines.States.PlayerStates {
         public override void OnEnterState(Human agent) {
             base.OnEnterState(agent);
 
-            agent.AnimationBrain.Animate(AnimId.Idle);
+            agent.AnimationBrain.Animate(AnimationId.Idle);
             ResetLocomotion(agent.Locomotion);
         }
 

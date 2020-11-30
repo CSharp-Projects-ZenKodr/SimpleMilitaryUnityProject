@@ -10,7 +10,10 @@ namespace Entity_Systems.Finite_State_Machines.States.PlayerStates {
             base.OnEnterState(agent);
 
             SetLocomotion(agent.Locomotion);
-            agent.AnimationBrain.Animate(AnimId.Walk);
+            agent.AnimationBrain.Animate(out var state, AnimationId.Walk);
+
+            state.Events.Add(AnimationEventStatics.Player.WalkLeftStepTime, agent.AudioBrain.LeftFootStep);
+            state.Events.Add(AnimationEventStatics.Player.WalkRightStepTime, agent.AudioBrain.RightFootStep);    
         }
 
         public override bool CanExitState(State<Human> nextState) {

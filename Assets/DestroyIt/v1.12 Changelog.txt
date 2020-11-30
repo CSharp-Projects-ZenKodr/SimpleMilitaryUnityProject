@@ -1,0 +1,34 @@
+Major Changes:
+- Added PlayMaker support for Destructible Actions (Damage, Repair, Destroy) and Events (OnDamaged, OnRepaired, OnDestroyed) and illustrated it with a new PlayMaker demo scene (under Extras).
+
+Bug Fixes:
+- Changed RepairDamage(int) to RepairDamage(float) on the Destructible script in order to support both float damage and repairing.
+- Destructible scripts would process collisions and take damage even when disabled. Now you can disable Destructible scripts and they will not process collisions, as expected. (Note: Destructible terrain trees still process collisions and take damage when the Destructible scripts are disabled, as intended).
+- Added a safety check in GetMeshCenterPoint() method to fix errors when a MeshFilter does not have a shared mesh.
+- Added safety checks to all code that un-registers an event when OnDisable() fires, to prevent the possibility of null reference exceptions.
+- Added a safety check to the ExplodeAfter.cs script to handle if there is no explosion prefab provided.
+- Fixed: Debris from ChipAwayDebris objects that were reparented to moveable objects would move along the ground with the object.
+- Fixed: Mesh center point calculation for static meshes changed from gameObject.isStatic property to meshRenderer.isPartOfStaticBatch property.
+- Fixed: Debris from destroyed objects which were added to the Object Pool manually (or not pooled at all) were not being initialized/configured properly, and velocity was not being tranferred to the debris after spawn.
+
+Minor Changes, Cleanups, and Enhancements:
+- Updated DestroyIt to Unity 2019.4.5f1 (LTS).
+- Added the WhenDamagedDamageParents script, so you can have Destructible objects damage their parents when they are damaged.
+- Added public Destroy() method that can be called on a Destructible object to destroy it immediately.
+- Cleaned up QuickStart demo scene, removing unneeded terrain and textures.
+- Created a PlayMaker action that applies damage to a Destructible object (DamageDestructibleObject)
+- Created a PlayMaker action that destroys a Destructible object (DestroyDestructibleObject)
+- Created a PlayMaker action that repairs a Destructible object (RepairDestructibleObject)
+- Added a script to send the Damaged event from a DestroyIt Destructible to PlayMaker.
+- Added a script to send the Repaired event from a DestroyIt Destructible to PlayMaker.
+- Added a script to send the Destroyed event from a DestroyIt Destructible to PlayMaker.
+- Added a new demo scene that illustrates how to use Playmaker actions and how to listen to DestroyIt Destructible events (under Extras)
+- Updated DestroyIt User Guide, adding a section on how to use the new PlayMaker Actions.
+- Extracted the DestroyIt-Ready user guide from the nested asset package and placed it at the root of the Extras folder, so you can read it without needing to unpack anything.
+- Renamed ObjectPool container to "DestroyIt_ObjectPool" instead of "_ObjectPool" to avoid conflicts with other object pooling systems.
+- ObjectPool now checks for an existing object named "DestroyIt_ObjectPool" and uses it instead of always creating a new container object regardless.
+- Mesh center point is now only calculated for a destructible object if it uses a fallback particle effect.
+- Added a Debug.Log for when you have a Destructible object with one or more static meshes, but no position override for the fallback particle effect. "Particle effect may not spawn where you expect."
+- On the Destructible script, if you use a Material Override for a particle effect, the system now applies progressive visual damage on the override material if it supports it.
+- Scenario #27 (Static Meshes) in the Main Demo Scene is now split into three separate variations of the scenario, for clarity and testing.
+- Angular Velocity is now also tranferred to debris from the Destructible object that spawned it. (Before, it was only Velocity that was transferred.)

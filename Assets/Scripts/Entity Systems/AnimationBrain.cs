@@ -34,7 +34,7 @@ namespace Entity_Systems {
             _animator = animator;
             QueryController = new AnimationQueryController(animator, container);
             
-            Debug.Assert(container.IdleSequence.Count > 1, "Idle sequence must have at least 1 element");
+            //Debug.Assert(container.IdleSequence.Count > 1, "Idle sequence must have at least 1 element");
         }
 
         #endregion
@@ -45,10 +45,10 @@ namespace Entity_Systems {
         /// Set the Animancer to 'idle' on game start
         /// </summary>
         public void Enable() {
-            //Animate(AnimId.Idle);
+            //Animate(AnimationId.Idle);
             
-            Debug.Assert(_container.IdleSequence.First().Clip.isLooping);    // Idle animations SHOULD be looping
-            Debug.Assert(_container.IdleSequence.Count > 1);    // A sequence should be greater than 1 element
+            //Debug.Assert(_container.IdleSequence.First().Clip.isLooping);    // Idle animations SHOULD be looping
+            //Debug.Assert(_container.IdleSequence.Count > 1);    // A sequence should be greater than 1 element
         }
 
         #endregion
@@ -58,7 +58,7 @@ namespace Entity_Systems {
         /// <summary>
         /// The core method for playing animations and generating states
         /// </summary>
-        /// <param name="animId">String literal of the animation to play; call AnimId static</param>
+        /// <param name="animId">String literal of the animation to play; call AnimationId static</param>
         /// <param name="onEndCallbacks">Optional: methods to subscribe to Events.OnEnd</param>
         /// <param name="fadeDuration">Optional: the blend time for the animation</param>
         public void Animate(string animId, float fadeDuration = 0.25f, IEnumerable<Action> onEndCallbacks = null) {
@@ -78,7 +78,7 @@ namespace Entity_Systems {
         /// The core method for playing animations and generating states
         /// </summary>
         /// <param name="state">AnimancerState to return (the clip being played)</param>
-        /// <param name="animId">String literal of the animation to play; call AnimId static</param>
+        /// <param name="animId">String literal of the animation to play; call AnimationId static</param>
         /// <param name="onEndCallbacks">Optional: methods to subscribe to Events.OnEnd</param>
         /// <param name="fadeDuration">Optional: the blend time for the animation</param>
         public AnimancerState Animate(out AnimancerState state, string animId, float fadeDuration = 0.25f, IEnumerable<Action> onEndCallbacks = null) {

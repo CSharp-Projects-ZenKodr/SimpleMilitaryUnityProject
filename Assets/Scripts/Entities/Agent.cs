@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
-using Animancer;
+﻿using Animancer;
 using Entity_Systems;
-using Entity_Systems.Finite_State_Machines;
-using Entity_Systems.Finite_State_Machines.Helpers;
-using Entity_Systems.Finite_State_Machines.States;
 using Entity_Systems.SubSystems.Animation.AnimationDataContainers;
 using Pathfinding;
-using Sirenix.Serialization;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Entities {
     #region Required Mono Components
@@ -17,6 +13,7 @@ namespace Entities {
     [RequireComponent(typeof(SimpleSmoothModifier))]
     [RequireComponent(typeof(AnimancerComponent))]
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(AudioSource))]
 
     #endregion
     
@@ -29,17 +26,19 @@ namespace Entities {
         protected Skeleton _skeleton;    // Provides access to the join system of the agent's prefab model
         protected AnimationBrain _animationBrain;
 
+        protected AudioSource _audioSource;
+        
         #endregion
         
         #region SerializeFields & Properties - Animation Related
         
-        [SerializeField] protected AnimDataContainer _container = null;
+        [FormerlySerializedAs("_container")] [SerializeField] protected AnimDataContainer _animDataContainer = null;
 
         public Raycasting Raycasting => _raycasting;
         public Pathing Pathing => _pathing;
         public Locomotion Locomotion => _locomotion;
         public Skeleton Skeleton => _skeleton;
-        public AnimDataContainer Container => _container;
+        public AnimDataContainer AnimDataContainer => _animDataContainer;
         public AnimationBrain AnimationBrain => _animationBrain;
         
         #endregion
@@ -57,7 +56,8 @@ namespace Entities {
             _raycasting = new Raycasting(Camera.main);
             _locomotion = new Locomotion(tr, GetComponent<AIPath>());
             _skeleton = new Skeleton(gameObject);
-            _animationBrain = new AnimationBrain(GetComponent<AnimancerComponent>(), _container, GetComponent<Animator>());
+            _animationBrain = new AnimationBrain(GetComponent<AnimancerComponent>(), _animDataContainer, GetComponent<Animator>());
+            _audioSource = GetComponent<AudioSource>();
         }
 
         /// <summary>
