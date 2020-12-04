@@ -2002,9 +2002,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000e0e4de893841449fe1b6a91171712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animDataContainer: {fileID: 11400000, guid: 414a438c833562b48a5b74c9df13101e, type: 2}
+  _animationDataContainer: {fileID: 11400000, guid: 4b0461e2b831d6249bdf03780444ccc7, type: 2}
+  _audioDataContainer: {fileID: 11400000, guid: bcabd5d7dc5a24145ba3b29c0a285bbc, type: 2}
   ProjectileWeapon: {fileID: 11400000, guid: a55292883e4f9b045b4a4357bedc8f85, type: 2}
-  _audioContainer: {fileID: 0}
   _states:
   - {fileID: 11400000, guid: 14e7a2c0cd51bdc4aa1850e6caa7121f, type: 2}
   - {fileID: 11400000, guid: ce5af05e1aa796e4d850867d95905443, type: 2}

@@ -1,6 +1,7 @@
-﻿using Animancer;
+﻿using Systems.Animation;
+using Systems.SubSystems.Data_Containers;
+using Animancer;
 using Entity_Systems;
-using Entity_Systems.SubSystems.Animation.AnimationDataContainers;
 using Pathfinding;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -18,32 +19,47 @@ namespace Entities {
     #endregion
     
     public abstract class Agent : MonoBehaviour {
-        #region Protected Fields & Propreties - Core Systems
+        #region Systems
 
         protected Pathing _pathing;    // Handles Agent pathing & navigation
+        public Pathing Pathing => _pathing;
+        
         protected Raycasting _raycasting;    // Handles all raycasting required by agent
+        public Raycasting Raycasting => _raycasting;
+        
         protected Locomotion _locomotion;    // Controls speed, direction, location, locomotion, etc.
+        public Locomotion Locomotion => _locomotion;
+        
         protected Skeleton _skeleton;    // Provides access to the join system of the agent's prefab model
+        public Skeleton Skeleton => _skeleton;
+
+        #endregion
+
+        #region Brains
+
         protected AnimationBrain _animationBrain;
+        public AnimationBrain AnimationBrain => _animationBrain;
+
+        #endregion
+
+        #region Monobehaviour Components
 
         protected AudioSource _audioSource;
-        
-        #endregion
-        
-        #region SerializeFields & Properties - Animation Related
-        
-        [FormerlySerializedAs("_container")] [SerializeField] protected AnimDataContainer _animDataContainer = null;
 
-        public Raycasting Raycasting => _raycasting;
-        public Pathing Pathing => _pathing;
-        public Locomotion Locomotion => _locomotion;
-        public Skeleton Skeleton => _skeleton;
-        public AnimDataContainer AnimDataContainer => _animDataContainer;
-        public AnimationBrain AnimationBrain => _animationBrain;
-        
         #endregion
-        
-        #region Protected Virtual Methods
+
+        #region Containers
+
+        [FormerlySerializedAs("animationDataContainer")] [FormerlySerializedAs("_animDataContainer")] [FormerlySerializedAs("_container")] [SerializeField] 
+        protected AnimationDataContainer _animationDataContainer = null;
+        public AnimationDataContainer AnimationDataContainer => _animationDataContainer;
+
+        [SerializeField] protected AudioDataContainer _audioDataContainer;
+        public AudioDataContainer AudioDataContainer => _audioDataContainer;
+
+        #endregion
+
+        #region Monobehaviour Methods
 
         /// <summary>
         /// Gets all agent's Monobehaviour components & creates new instances of required systems
@@ -56,7 +72,7 @@ namespace Entities {
             _raycasting = new Raycasting(Camera.main);
             _locomotion = new Locomotion(tr, GetComponent<AIPath>());
             _skeleton = new Skeleton(gameObject);
-            _animationBrain = new AnimationBrain(GetComponent<AnimancerComponent>(), _animDataContainer, GetComponent<Animator>());
+            _animationBrain = new AnimationBrain(GetComponent<AnimancerComponent>(), _animationDataContainer, GetComponent<Animator>());
             _audioSource = GetComponent<AudioSource>();
         }
 
@@ -72,7 +88,7 @@ namespace Entities {
 
         #endregion
         
-        #region Protected Abstract Methods
+        #region Abstract Methods
         
         /// <summary>
         /// Handles population of any dependencies that are specific to that agent

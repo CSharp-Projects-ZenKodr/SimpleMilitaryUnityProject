@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using Systems.Animation;
+using Systems.Equipment;
+using Systems.Equipment.Weapons;
+using Systems.Finite_State_Machines.Interfaces;
+using Systems.Finite_State_Machines.Machine.Machines;
+using Systems.Input;
 using Entity_Systems;
 using Entity_Systems.Finite_State_Machines.Helpers;
-using Entity_Systems.Finite_State_Machines.Machine;
 using Entity_Systems.Finite_State_Machines.States.Wrappers;
 using Entity_Systems.SubSystems.Audio.Brains;
-using Entity_Systems.SubSystems.Audio.Data_Containers;
 using Helpers;
 using Interfaces;
-using Interfaces.States;
-using Items.Weapons;
-using Static_Helpers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,41 +25,42 @@ namespace Entities.Human {
 
         #endregion
         
-        #region Private Fields - System Related
+        #region Systems
 
         private Combat _combat;
+        public Combat Combat => _combat;
+
         private Equipment _equipment;
-        private InputBrain _inputBrain;
-        private HumanAudioBrain _audioBrain;
+        public Equipment Equipment => _equipment;
+
+        #region State Machine
+
         private HumanStateMachine _machine;
-        [SerializeField] private HumanAudioDataContainer _audioContainer;
+        public HumanStateMachine Machine => _machine;
+        
         [SerializeField] private List<StateWrapperHuman> _states;
+        public List<StateWrapperHuman> States => _states; 
 
         #endregion
 
-        #region Public Fields - System Realted
+        #endregion
 
+        #region Brains
+        
+        private InputBrain _inputBrain;
+        public InputBrain InputBrain => _inputBrain;
+
+        private HumanAudioBrain _audioBrain;
         public HumanAudioBrain AudioBrain => _audioBrain;
-        public HumanAudioDataContainer AudioContainer => _audioContainer;
 
         #endregion
 
-        #region Private Fields - Human Related
+        #region Private Fields - Input Related
 
         private bool _isLMBTrigger = false;
 
         #endregion
 
-        #region Properties
-
-        public Combat Combat => _combat;
-        public Equipment Equipment => _equipment;
-        public InputBrain InputBrain => _inputBrain;
-        public HumanStateMachine Machine => _machine;
-        public List<StateWrapperHuman> States => _states; 
-        
-        #endregion
-       
         #region Protected Overrided Methods - Initializations
 
         protected override void Awake() {
@@ -86,7 +88,7 @@ namespace Entities.Human {
         protected override void CreateAgentSpecificDependencies() {
             _combat = new Combat();
             _equipment = new Equipment();
-            _audioBrain = new HumanAudioBrain(this, _audioSource);
+            _audioBrain = new HumanAudioBrain(this, _audioDataContainer, _audioSource);
             _machine = new HumanStateMachine(this, _states);
         }
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\stane\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\stane\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SimpleMilitaryUnityProject.620703417.00" t="ExcludeRecursive" />
-    <e p="C:\Users\stane\Documents\GitHub\SimpleMilitaryUnityProject" t="IncludeRecursive">
+    <e p="C:\Users\uidq0628\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\uidq0628\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SimpleMilitaryUnityProject.193152727.00" t="ExcludeRecursive" />
+    <e p="C:\Users\uidq0628\Documents\GitHub\SimpleMilitaryUnityProject" t="IncludeRecursive">
       <e p="Animancer.csproj" t="IncludeRecursive" />
       <e p="Animancer.Examples.csproj" t="IncludeRecursive" />
       <e p="Animancer.FSM.csproj" t="IncludeRecursive" />
@@ -887,27 +887,103 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="CameraHelper" t="Include">
-            <e p="MainCameraController.cs" t="Include" />
-          </e>
           <e p="Entities" t="Include">
             <e p="Agent.cs" t="Include" />
-            <e p="Enemy.cs" t="Include" />
+            <e p="Enemies" t="Include">
+              <e p="Enemy.cs" t="Include" />
+            </e>
             <e p="Human" t="Include">
               <e p="Human.cs" t="Include" />
             </e>
           </e>
-          <e p="Entity Systems" t="Include">
-            <e p="AnimationBrain.cs" t="Include" />
-            <e p="AudioBrain.cs" t="Include" />
-            <e p="Combat.cs" t="Include" />
-            <e p="Equipment.cs" t="Include" />
+          <e p="Helpers" t="Include">
+            <e p="ExtensionMethods.cs" t="Include" />
+            <e p="Joints.cs" t="Include" />
+            <e p="TagHelper.cs" t="Include" />
+          </e>
+          <e p="Interfaces" t="Include">
+            <e p="FauxMonoMethods" t="Include">
+              <e p="IOnDisable.cs" t="Include" />
+              <e p="IOnUpdate.cs" t="Include" />
+            </e>
+            <e p="HumanControlAndInput" t="Include">
+              <e p="IActions.cs" t="Include" />
+              <e p="IEquipmentActions.cs" t="Include" />
+              <e p="IInventoryActions.cs" t="Include" />
+            </e>
+            <e p="IInitialize.cs" t="Include" />
+            <e p="Initializations" t="Include">
+              <e p="IOnAwake.cs" t="Include" />
+              <e p="IOnEnable.cs" t="Include" />
+              <e p="IOnStart.cs" t="Include" />
+              <e p="ISubscribeToSubSystemEvents.cs" t="Include" />
+            </e>
+            <e p="Weapons" t="Include">
+              <e p="IAbility.cs" t="Include" />
+              <e p="IFire.cs" t="Include" />
+              <e p="IModifier.cs" t="Include" />
+            </e>
+          </e>
+          <e p="MonoManagers" t="Include">
+            <e p="AudioManager.cs" t="Include" />
+            <e p="MainCameraManager.cs" t="Include" />
+            <e p="Root" t="Include">
+              <e p="Singleton.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Systems" t="Include">
+            <e p="Animation" t="Include">
+              <e p="AnimationBrain.cs" t="Include" />
+              <e p="Controllers" t="Include">
+                <e p="AnimationLocomotionController.cs" t="Include" />
+                <e p="AnimationQueryController.cs" t="Include" />
+              </e>
+              <e p="Helpers" t="Include">
+                <e p="AnimationDictionaryKeys.cs" t="Include" />
+                <e p="AnimationEventStatics.cs" t="Include" />
+              </e>
+              <e p="Interfaces" t="Include">
+                <e p="IOnCrouch.cs" t="Include" />
+                <e p="IOnPrimaryClick.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Audio" t="Include">
+              <e p="AudioBrain.cs" t="Include" />
+              <e p="Brains" t="Include">
+                <e p="HumanAudioBrain.cs" t="Include" />
+              </e>
+              <e p="Helpers" t="Include">
+                <e p="AudioClipDictionaryKeys.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Combat" t="Include">
+              <e p="Combat.cs" t="Include" />
+            </e>
+            <e p="Equipment" t="Include">
+              <e p="Equipment.cs" t="Include" />
+              <e p="SpawnableItem.cs" t="Include" />
+              <e p="Weapons" t="Include">
+                <e p="Ammunition" t="Include">
+                  <e p="Ammo.cs" t="Include" />
+                </e>
+                <e p="Guns" t="Include">
+                  <e p="M16.cs" t="Include" />
+                </e>
+                <e p="ProjectileWeapon.cs" t="Include" />
+              </e>
+            </e>
             <e p="Finite State Machines" t="Include">
               <e p="Helpers" t="Include">
                 <e p="Priority.cs" t="Include" />
               </e>
+              <e p="Interfaces" t="Include">
+                <e p="IStateActionWrapper.cs" t="Include" />
+                <e p="IStateWrapper.cs" t="Include" />
+              </e>
               <e p="Machine" t="Include">
-                <e p="HumanStateMachine.cs" t="Include" />
+                <e p="Machines" t="Include">
+                  <e p="HumanStateMachine.cs" t="Include" />
+                </e>
                 <e p="StateMachine.cs" t="Include" />
               </e>
               <e p="StateAction" t="Include">
@@ -932,93 +1008,28 @@
                 </e>
               </e>
             </e>
-            <e p="InputBrain.cs" t="Include" />
-            <e p="Locomotion.cs" t="Include" />
-            <e p="Pathing.cs" t="Include" />
-            <e p="Raycasting.cs" t="Include" />
-            <e p="Skeleton.cs" t="Include" />
+            <e p="Input" t="Include">
+              <e p="InputBrain.cs" t="Include" />
+            </e>
+            <e p="Locomotion" t="Include">
+              <e p="Locomotion.cs" t="Include" />
+            </e>
+            <e p="Pathfinding" t="Include">
+              <e p="Pathing.cs" t="Include" />
+            </e>
+            <e p="Raycasting" t="Include">
+              <e p="Raycasting.cs" t="Include" />
+            </e>
+            <e p="Skeleton" t="Include">
+              <e p="Skeleton.cs" t="Include" />
+            </e>
             <e p="Subsystems" t="Include">
-              <e p="Animation" t="Include">
-                <e p="AnimationDataContainers" t="Include">
-                  <e p="AnimDataContainer.cs" t="Include" />
-                </e>
-                <e p="AnimationLocomotionController.cs" t="Include" />
-                <e p="AnimationQueryController.cs" t="Include" />
-                <e p="Helpers" t="Include">
-                  <e p="AnimationEventStatics.cs" t="Include" />
-                  <e p="AnimationId.cs" t="Include" />
-                  <e p="AnimationParameterStatics.cs" t="Include" />
-                  <e p="AnimationWeaponTypes.cs" t="Include" />
-                </e>
-              </e>
-              <e p="Audio" t="Include">
-                <e p="Brains" t="Include">
-                  <e p="HumanAudioBrain.cs" t="Include" />
-                </e>
-                <e p="Data Containers" t="Include">
-                  <e p="HumanAudioDataContainer.cs" t="Include" />
-                </e>
-              </e>
               <e p="Data Containers" t="Include">
+                <e p="AnimationDataContainer.cs" t="Include" />
+                <e p="AudioDataContainer.cs" t="Include" />
                 <e p="DataContainer.cs" t="Include" />
-                <e p="DataContainerAnimationsWrapper.cs" t="Include" />
-                <e p="DataContainerAudioWrapper.cs" t="Include" />
               </e>
             </e>
-          </e>
-          <e p="Generics" t="Include">
-            <e p="Singleton.cs" t="Include" />
-          </e>
-          <e p="Helpers" t="Include">
-            <e p="ExtensionMethods.cs" t="Include" />
-            <e p="Joints.cs" t="Include" />
-            <e p="TagHelper.cs" t="Include" />
-          </e>
-          <e p="Interfaces" t="Include">
-            <e p="Animations" t="Include">
-              <e p="IOnCrouch.cs" t="Include" />
-              <e p="IOnPrimaryClick.cs" t="Include" />
-            </e>
-            <e p="FauxMonoMethods" t="Include">
-              <e p="IOnDisable.cs" t="Include" />
-              <e p="IOnUpdate.cs" t="Include" />
-            </e>
-            <e p="HumanControlAndInput" t="Include">
-              <e p="IActions.cs" t="Include" />
-              <e p="IEquipmentActions.cs" t="Include" />
-              <e p="IInventoryActions.cs" t="Include" />
-            </e>
-            <e p="IInitialize.cs" t="Include" />
-            <e p="Initializations" t="Include">
-              <e p="IOnAwake.cs" t="Include" />
-              <e p="IOnEnable.cs" t="Include" />
-              <e p="IOnStart.cs" t="Include" />
-              <e p="ISubscribeToSubSystemEvents.cs" t="Include" />
-            </e>
-            <e p="States" t="Include">
-              <e p="IStateActionWrapper.cs" t="Include" />
-              <e p="IStateWrapper.cs" t="Include" />
-            </e>
-            <e p="Weapons" t="Include">
-              <e p="IAbility.cs" t="Include" />
-              <e p="IFire.cs" t="Include" />
-              <e p="IModifier.cs" t="Include" />
-            </e>
-          </e>
-          <e p="Items" t="Include">
-            <e p="Equipment.cs" t="Include" />
-            <e p="Weapons" t="Include">
-              <e p="Ammunition" t="Include">
-                <e p="Ammo.cs" t="Include" />
-              </e>
-              <e p="Guns" t="Include">
-                <e p="M16.cs" t="Include" />
-              </e>
-              <e p="ProjectileWeapon.cs" t="Include" />
-            </e>
-          </e>
-          <e p="Managers" t="Include">
-            <e p="AudioManager.cs" t="Include" />
           </e>
         </e>
         <e p="SimpleMilitary" t="Include">
