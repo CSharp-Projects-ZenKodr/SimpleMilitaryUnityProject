@@ -4,12 +4,12 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Systems.SubSystems.Data_Containers {
+    
     public abstract class DataContainer<T> : SerializedScriptableObject 
         where T : class {
         #region Container Dictionary
 
         [SerializeField] protected Dictionary<string, T> _dictionary = new Dictionary<string, T>();
-        [HideInInspector] public Dictionary<string, T> Dictionary => _dictionary;
         
         #endregion
 
